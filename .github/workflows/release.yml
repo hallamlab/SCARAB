@@ -10,6 +10,8 @@ on:
     branches: ['docs/user-guide']
     paths:
       - '.github/workflows/release.yml'
+      - 'src/scarab/**'
+      - 'tests/release/**'
       - 'Dockerfile'
       - '.dockerignore'
       - 'environment.yml'

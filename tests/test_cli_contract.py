@@ -1,12 +1,13 @@
 import contextlib
 import io
 import json
+import os
 import tempfile
 from pathlib import Path
 import unittest
 from unittest.mock import patch
 from scarab.commands import _parse_recruit_args
-from scarab.validation import validate_inputs, prepare_output, run_guard, read_id
+from scarab.validation import validate_inputs, prepare_output, run_guard, read_id, numerical_cache
 
 
 class ContractTests(unittest.TestCase):
@@ -63,5 +64,20 @@ class ContractTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'directory'):
             validate_inputs(_parse_recruit_args(self.base+['--force']))
         self.assertEqual((self.root/'out').read_text(),'keep')
+    def test_private_numba_cache_is_cleaned_after_failure(self):
+        with patch.dict(os.environ, {}, clear=True):
+            with self.assertRaises(RuntimeError):
+                with numerical_cache(self.root):
+                    cache=Path(os.environ['NUMBA_CACHE_DIR'])
+                    (cache/'compiled').write_text('cache')
+                    self.assertEqual(cache.parent,self.root)
+                    raise RuntimeError('stop')
+            self.assertFalse(cache.exists())
+            self.assertNotIn('NUMBA_CACHE_DIR',os.environ)
+    def test_explicit_numba_cache_is_preserved(self):
+        with patch.dict(os.environ, {'NUMBA_CACHE_DIR':str(self.root)}):
+            with numerical_cache(self.root):
+                self.assertEqual(os.environ['NUMBA_CACHE_DIR'],str(self.root))
+            self.assertEqual(os.environ['NUMBA_CACHE_DIR'],str(self.root))
 
 if __name__=='__main__': unittest.main()

@@ -6,6 +6,8 @@
 
 BBTools deduplication uses a 4 GB Java heap by default. Set `--dedupe_memory 8g` (or a value in `m`) for larger xPGs. This bounds that subprocess heap only; Python matrices, other tools, and Java overhead need additional memory.
 
+SCARAB gives Numba a temporary cache inside the output directory and removes it after the run. This supports read-only installations and containers running as your user. An explicitly configured `NUMBA_CACHE_DIR` is respected.
+
 ## Slurm
 
 SCARAB has no native Nextflow/Slurm submission interface. Submit the whole command as one cluster job and request resources for that command. For example, adapt this submission script to your cluster:

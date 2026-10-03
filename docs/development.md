@@ -28,7 +28,7 @@ The regression tests exercise input validation, effective parameter overrides, s
 ```bash
 mamba create -n scarab-build -c conda-forge python=3.11 conda-build conda-index python-build
 mamba run -n scarab-build conda build conda-recipe-local \
-  --override-channels -c conda-forge -c bioconda --output-folder "$PWD/dist/conda"
+  --override-channels -c conda-forge -c bioconda --no-anaconda-upload --output-folder "$PWD/dist/conda"
 mamba run -n scarab-build conda index "$PWD/dist/conda"
 mamba create -n scarab-package-test --strict-channel-priority \
   -c "file://$PWD/dist/conda" -c conda-forge -c bioconda scarab=1.0.0

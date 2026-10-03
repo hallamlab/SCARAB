@@ -52,7 +52,7 @@ env-remove: ## Remove the conda environment
 
 .PHONY: conda-build-local
 conda-build-local: ## Build from local sources using conda-recipe-local
-	CONDA_BLD_PATH="$(CONDA_BLD_PATH)" $(CONDA_BUILD) build --python $(PY_VER) $(RECIPE_LOCAL)
+	CONDA_BLD_PATH="$(CONDA_BLD_PATH)" $(CONDA_BUILD) build --no-anaconda-upload --python $(PY_VER) $(RECIPE_LOCAL)
 	$(MAKE) conda-index
 
 
@@ -63,7 +63,7 @@ conda-mambabuild-local: ## Build locally with conda-mambabuild (boa)
 
 .PHONY: conda-build-release
 conda-build-release: ## Build from the release recipe using conda-recipe
-	CONDA_BLD_PATH="$(CONDA_BLD_PATH)" $(CONDA_BUILD) build --python $(PY_VER) $(RECIPE_RELEASE)
+	CONDA_BLD_PATH="$(CONDA_BLD_PATH)" $(CONDA_BUILD) build --no-anaconda-upload --python $(PY_VER) $(RECIPE_RELEASE)
 	$(MAKE) conda-index
 
 .PHONY: conda-build-purge

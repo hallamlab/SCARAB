@@ -91,6 +91,25 @@ def prepare_output(args, paths):
 
 from contextlib import contextmanager
 import fcntl
+import tempfile
+
+
+@contextmanager
+def numerical_cache(output):
+    """Let Numba run under arbitrary container UIDs and read-only installs."""
+    if os.environ.get('NUMBA_CACHE_DIR'):
+        yield
+        return
+    previous = os.environ.get('NUMBA_CACHE_DIR')
+    with tempfile.TemporaryDirectory(prefix='.scarab-numba-', dir=output) as cache:
+        os.environ['NUMBA_CACHE_DIR'] = cache
+        try:
+            yield
+        finally:
+            if previous is None:
+                os.environ.pop('NUMBA_CACHE_DIR', None)
+            else:
+                os.environ['NUMBA_CACHE_DIR'] = previous
 
 
 @contextmanager

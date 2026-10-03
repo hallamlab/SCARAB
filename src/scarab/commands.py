@@ -201,10 +201,11 @@ def info(sys_args):
 def recruit(sys_args):
     """Recruit environmental reads to reference contigs."""
     args = _parse_recruit_args(sys_args)
-    from scarab.validation import validate_inputs, run_guard
+    from scarab.validation import validate_inputs, run_guard, numerical_cache
     paths = validate_inputs(args)
     with run_guard(args, paths):
-        _recruit(args)
+        with numerical_cache(args.save_path):
+            _recruit(args)
 
 
 def _recruit(args):

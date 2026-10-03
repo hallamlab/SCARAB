@@ -7,6 +7,7 @@
 - Propagate mapping and deduplication failures instead of silently continuing.
 - Preserve distinct paired reads and sample basenames; isolate mapping temporary files.
 - Handle custom k-mer sizes, missing anchors, and noise-only clusters.
+- Use a private temporary Numba cache for read-only installations and arbitrary container users.
 - Bound the BBTools heap with `--dedupe_memory` (default 4g).
 - Add a checksum-verified public reviewer demo and table/sequence consistency checks.
 - Replace obsolete CI and automatic tag publication with explicit candidate builds.
