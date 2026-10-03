@@ -1,13 +1,49 @@
-name: Build release candidates (no publishing)
+name: Build and validate release candidates
 on:
   workflow_dispatch:
+    inputs:
+      publish:
+        description: 'Publish tested artifacts to Anaconda and Quay (requires a matching version tag)'
+        type: boolean
+        default: false
+  push:
+    branches: ['docs/user-guide']
+    paths:
+      - '.github/workflows/release.yml'
+      - 'Dockerfile'
+      - '.dockerignore'
+      - 'environment.yml'
+      - 'conda-recipe-local/**'
+      - 'scripts/check_release.py'
 permissions:
   contents: read
+concurrency:
+  group: release-candidate-${{ github.ref }}
+  cancel-in-progress: false
 jobs:
-  conda:
+  validate:
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Test release guard
+        run: python3 -m unittest discover -s tests/release
+      - name: Validate source and publication request
+        id: version
+        env:
+          PUBLISH_REQUESTED: ${{ inputs.publish || false }}
+        run: python3 scripts/check_release.py
+  conda:
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - uses: mamba-org/setup-micromamba@v2
         with:
           environment-name: build-tools
@@ -16,29 +52,131 @@ jobs:
             -c conda-forge
       - name: Build and test local recipe
         shell: bash -el {0}
-        run: conda build conda-recipe-local --override-channels -c conda-forge -c bioconda --output-folder dist/conda
+        run: conda build conda-recipe-local --override-channels -c conda-forge -c bioconda --no-anaconda-upload --output-folder dist/conda
+      - name: Record package checksum
+        run: |
+          cd dist/conda/noarch
+          sha256sum scarab-*.conda > SHA256SUMS
       - uses: actions/upload-artifact@v4
         with:
           name: conda-packages
-          path: dist/conda/noarch/scarab-*
+          path: |
+            dist/conda/noarch/scarab-*.conda
+            dist/conda/noarch/SHA256SUMS
+          if-no-files-found: error
+          retention-days: 7
   container:
+    needs: validate
     runs-on: ubuntu-latest
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - name: Build image
-        run: docker build -t scarab:candidate .
-      - name: CLI smoke test
+        env:
+          VERSION: ${{ needs.validate.outputs.version }}
+        run: |
+          docker build --label "org.opencontainers.image.revision=$GITHUB_SHA" \
+            --label "org.opencontainers.image.version=$VERSION" -t scarab:candidate .
+      - name: CLI and regression tests
         run: |
           docker run --rm scarab:candidate scarab info
           docker run --rm scarab:candidate scarab recruit --help
-      - name: Run reviewer test in container
+          docker run --rm -v "$PWD/tests:/tests:ro" scarab:candidate python -m unittest discover -s /tests -p 'test_*.py'
+      - name: Run reviewer test in Docker
         run: |
           python3 scripts/prepare_reviewer.py --output "$RUNNER_TEMP/scarab-reviewer"
           cd "$RUNNER_TEMP/scarab-reviewer/demo"
           docker run --rm -u "$(id -u):$(id -g)" -v "$PWD:$PWD" -w "$PWD" scarab:candidate scarab recruit -m k12.gold_assembly.fasta -l read_list.txt -s SAG -o SCARAB_out -t 2
           python3 "$GITHUB_WORKSPACE/scripts/validate_reviewer.py" --dataset . --output SCARAB_out
-      - run: docker save scarab:candidate | gzip > scarab-candidate.tar.gz
+      - name: Export tested Docker image
+        run: docker save scarab:candidate -o "$RUNNER_TEMP/scarab-image.tar"
+      - name: Install Apptainer
+        run: |
+          sudo add-apt-repository --yes ppa:apptainer/ppa
+          sudo apt-get update
+          sudo apt-get install --yes apptainer
+      - name: Convert image and run reviewer test in Apptainer
+        run: |
+          mkdir -p dist/container
+          apptainer build dist/container/scarab.sif "docker-archive://$RUNNER_TEMP/scarab-image.tar"
+          cd "$RUNNER_TEMP/scarab-reviewer/demo"
+          apptainer exec --bind "$PWD:$PWD" --pwd "$PWD" "$GITHUB_WORKSPACE/dist/container/scarab.sif" scarab recruit -m k12.gold_assembly.fasta -l read_list.txt -s SAG -o SCARAB_out_apptainer -t 2
+          python3 "$GITHUB_WORKSPACE/scripts/validate_reviewer.py" --dataset . --output SCARAB_out_apptainer
+      - name: Record container artifacts and checksums
+        run: |
+          gzip -c "$RUNNER_TEMP/scarab-image.tar" > dist/container/scarab-candidate.tar.gz
+          cd dist/container
+          sha256sum scarab.sif scarab-candidate.tar.gz > SHA256SUMS
       - uses: actions/upload-artifact@v4
         with:
           name: container-archive
-          path: scarab-candidate.tar.gz
+          path: dist/container/
+          if-no-files-found: error
+          retention-days: 7
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: container-reviewer-logs
+          path: |
+            ${{ runner.temp }}/scarab-reviewer/demo/SCARAB_out*/SCARAB_log.txt
+            ${{ runner.temp }}/scarab-reviewer/demo/SCARAB_out*/scarab_*.json
+          if-no-files-found: ignore
+          retention-days: 7
+  publish:
+    needs: [validate, conda, container]
+    if: github.event_name == 'workflow_dispatch' && inputs.publish
+    environment: release
+    runs-on: ubuntu-latest
+    env:
+      VERSION: ${{ needs.validate.outputs.version }}
+      ANACONDA_OWNER: ${{ vars.ANACONDA_OWNER || 'hallamlab' }}
+      QUAY_REPOSITORY: ${{ vars.QUAY_REPOSITORY || 'quay.io/hallamlab/scarab' }}
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: conda-packages
+          path: packages
+      - uses: actions/download-artifact@v4
+        with:
+          name: container-archive
+          path: containers
+      - name: Verify artifacts
+        run: |
+          (cd packages && sha256sum --check SHA256SUMS)
+          (cd containers && sha256sum --check SHA256SUMS)
+          docker load -i containers/scarab-candidate.tar.gz
+          test "$(docker inspect --format '{{index .Config.Labels "org.opencontainers.image.revision"}}' scarab:candidate)" = "$GITHUB_SHA"
+          test "$(docker inspect --format '{{index .Config.Labels "org.opencontainers.image.version"}}' scarab:candidate)" = "$VERSION"
+      - uses: mamba-org/setup-micromamba@v2
+        with:
+          environment-name: upload-tools
+          create-args: >-
+            python=3.11 anaconda-client
+            -c conda-forge
+      - name: Check publisher credentials
+        env:
+          BINSTAR_API_TOKEN: ${{ secrets.ANACONDA_API_TOKEN }}
+          QUAY_USERNAME: ${{ secrets.QUAY_USERNAME }}
+          QUAY_PASSWORD: ${{ secrets.QUAY_PASSWORD }}
+        run: |
+          test -n "$BINSTAR_API_TOKEN" || { echo 'Missing ANACONDA_API_TOKEN'; exit 1; }
+          test -n "$QUAY_USERNAME" || { echo 'Missing QUAY_USERNAME'; exit 1; }
+          test -n "$QUAY_PASSWORD" || { echo 'Missing QUAY_PASSWORD'; exit 1; }
+      - name: Publish Conda package
+        shell: bash -el {0}
+        env:
+          BINSTAR_API_TOKEN: ${{ secrets.ANACONDA_API_TOKEN }}
+        run: anaconda upload --user "$ANACONDA_OWNER" --label main packages/scarab-"$VERSION"-*.conda
+      - name: Publish validated Docker image
+        env:
+          QUAY_USERNAME: ${{ secrets.QUAY_USERNAME }}
+          QUAY_PASSWORD: ${{ secrets.QUAY_PASSWORD }}
+        run: |
+          export DOCKER_CONFIG="$RUNNER_TEMP/scarab-docker-auth"
+          mkdir -p "$DOCKER_CONFIG"
+          trap 'rm -rf "$DOCKER_CONFIG"' EXIT
+          printf '%s' "$QUAY_PASSWORD" | docker login quay.io --username "$QUAY_USERNAME" --password-stdin
+          docker tag scarab:candidate "$QUAY_REPOSITORY:$VERSION"
+          docker push "$QUAY_REPOSITORY:$VERSION"
