@@ -47,7 +47,7 @@ test:
     - command -v jgi_summarize_bam_contig_depths
     - command -v dedupe.sh
 about:
-  home: https://github.com/RyloByte/SCARAB
+  home: https://github.com/hallamlab/SCARAB
   license: GPL-3.0-only
   license_file: LICENSE
   summary: Genome-guided recruitment of metagenomic contigs and extended partial genomes.

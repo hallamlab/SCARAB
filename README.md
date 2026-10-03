@@ -6,7 +6,7 @@ SCARAB recruits metagenomic reads using single-cell amplified genomes as referen
 
 Its recruitment workflow combines assembly composition, read-coverage profiles, and optional trusted-genome anchors to recover metagenomic contigs and extended partial genomes (xPGs).
 
-[User guide](docs/index.md) · [Installation](docs/installation.md) · [CLI reference](docs/cli-reference.md) · [Issues and feature requests](https://github.com/RyloByte/SCARAB/issues)
+[User guide](docs/index.md) · [Installation](docs/installation.md) · [CLI reference](docs/cli-reference.md) · [Issues and feature requests](https://github.com/hallamlab/SCARAB/issues)
 
 ## Quick start
 
@@ -39,4 +39,4 @@ For your own data, provide an assembly FASTA, a text list of FASTQ paths, and op
 
 The [user guide](docs/index.md) covers [installation](docs/installation.md), the [reviewer test](docs/reviewer-test.md), [parameters](docs/parameters.md), [outputs](docs/outputs.md), and [HPC execution and reruns](docs/resources.md).
 
-Documentation source lives in `docs/`. [Report issues or request features](https://github.com/RyloByte/SCARAB/issues).
+Documentation source lives in `docs/`. [Report issues or request features](https://github.com/hallamlab/SCARAB/issues).

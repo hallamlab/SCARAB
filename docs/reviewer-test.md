@@ -7,7 +7,7 @@ Use the historical public E. coli K12 demo: one assembly, **three paired-read li
 Use your existing SCARAB checkout for the helper scripts. If you installed only the package or container, obtain the scripts first:
 
 ```bash
-git clone https://github.com/RyloByte/SCARAB.git SCARAB-reviewer
+git clone https://github.com/hallamlab/SCARAB.git SCARAB-reviewer
 cd SCARAB-reviewer
 ```
 

@@ -63,7 +63,7 @@ This uses the local image archive and does not require uploading it to Quay.
 ## 4. GitHub source installation
 
 ```bash
-git clone https://github.com/RyloByte/SCARAB.git
+git clone https://github.com/hallamlab/SCARAB.git
 cd SCARAB
 mamba env create -f environment.yml
 mamba activate scarab_cenv

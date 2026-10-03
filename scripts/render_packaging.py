@@ -10,7 +10,7 @@ def render():
     deps=['python='+runtime['python'], 'pip', 'wheel']+[s.replace('==','=') for s in requirements]+runtime['tools']
     env='name: scarab_cenv\nchannels:\n  - conda-forge\n  - bioconda\ndependencies:\n'+''.join('  - '+s+'\n' for s in deps)
     files={'environment.yml':env,'scarab_env.yml':env}
-    for folder,source in [('conda-recipe-local','  path: ..'),('conda-recipe',f'  git_url: https://github.com/RyloByte/SCARAB.git\n  git_rev: v{version}')]:
+    for folder,source in [('conda-recipe-local','  path: ..'),('conda-recipe',f'  git_url: https://github.com/hallamlab/SCARAB.git\n  git_rev: v{version}')]:
         run=['python >=3.10,<3.11']+[s.replace('==',' ') for s in requirements]+[s.replace('=',' ') for s in runtime['tools']]
         files[folder+'/meta.yaml']=f'''package:
   name: scarab
@@ -41,7 +41,7 @@ requirements:
     - command -v jgi_summarize_bam_contig_depths
     - command -v dedupe.sh
 about:
-  home: https://github.com/RyloByte/SCARAB
+  home: https://github.com/hallamlab/SCARAB
   license: GPL-3.0-only
   license_file: LICENSE
   summary: Genome-guided recruitment of metagenomic contigs and extended partial genomes.

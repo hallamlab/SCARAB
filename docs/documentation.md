@@ -17,7 +17,7 @@ Open `http://localhost:8765`. `-W` makes documentation warnings fail the build.
 ## Read the Docs administration
 
 1. Sign in to Read the Docs and connect GitHub.
-2. Import `RyloByte/SCARAB`. If the preferred project name is taken, choose an available project slug; the displayed title can remain SCARAB.
+2. Import `hallamlab/SCARAB`. If the preferred project name is taken, choose an available project slug; the displayed title can remain SCARAB.
 3. Use `.readthedocs.yaml` at the repository root as the configuration path.
 4. Select a branch that contains this configuration and the guide. If it is missing from the dropdown, resynchronize repository versions and activate that branch.
 5. Build the selected version and inspect its build log. The default repository branch will not build this guide until these files are merged there.

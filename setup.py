@@ -37,7 +37,7 @@ SETUP_METADATA = \
         "long_description_content_type": "text/markdown",
         "author": "Ryan McLaughlin, Connor Morgan-Lang",
         "author_email": "mclaughlinr2@gmail.com",
-        "url": "https://github.com/RyloByte/SCARAB",
+        "url": "https://github.com/hallamlab/SCARAB",
         "license": "GPL-3.0",
         "python_requires": ">=3.10,<3.11",
         "include_package_data": True,
