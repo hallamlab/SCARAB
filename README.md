@@ -2,7 +2,7 @@
 
 SCARAB recruits and bins metagenomic contigs using sequence composition, read abundance, and optional trusted genomes such as SAGs. It produces extended partial genomes (xPGs) and supports optional guided reassembly in the same environment.
 
-**[Read the full user guide on Read the Docs](https://hallamlab-scarab.readthedocs.io/)**
+**[Full user guide](https://hallamlab-scarab.readthedocs.io/en/latest/index.html)** · [Reviewer test](https://hallamlab-scarab.readthedocs.io/en/latest/reviewer-test.html) · [Issues and feature requests](https://github.com/hallamlab/SCARAB/issues)
 
 ## Quick start
 
