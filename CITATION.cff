@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+message: "Please cite SCARAB and record the release version or Git commit used. The author list is provisional pending manuscript review."
+type: software
+title: SCARAB
+version: "1.0.0"
+repository-code: "https://github.com/hallamlab/SCARAB"
+url: "https://github.com/hallamlab/SCARAB"
+license: GPL-3.0
+# Provisional author list supplied by the maintainer; review before archiving.
+# Do not substitute GitHub contributor profiles or infer affiliations.
+authors:
+  - family-names: McLaughlin
+    given-names: Ryan J.
+  - family-names: Hallam
+    given-names: Steven J.

@@ -1,5 +1,10 @@
 # Software and method citations
 
+The repository's `CITATION.cff` declares Ryan J. McLaughlin and Steven J. Hallam
+as the provisional author list supplied by the maintainer. Confirm the final
+manuscript authors before archiving a release. Affiliations and ORCIDs are
+intentionally omitted until supplied; do not derive them from GitHub profiles.
+
 Record the SCARAB repository revision or release with your methods, and cite the tools used by the enabled stages. The [workflow page](workflow.md) shows where they enter the analysis. This guide does not assign an unverified manuscript DOI to SCARAB.
 
 | Software | Use | Citation / project |

@@ -115,3 +115,8 @@ to retain its concept DOI. Review creators, affiliations, version, license,
 and the exact GitHub tag link before publishing the draft. Do not infer authors
 or affiliations from commit contributors. Correct existing creator metadata
 with **Edit**, without making a new software version solely for that correction.
+
+Release validation requires `CITATION.cff` with explicit, nonduplicate author
+names and a version matching the package. An overriding `.zenodo.json` is
+rejected so there is only one citation metadata source. The current two-author
+list is provisional and must be reviewed against the manuscript before archiving.

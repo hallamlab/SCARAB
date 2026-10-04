@@ -21,6 +21,7 @@ on:
       - 'environment.yml'
       - 'conda-recipe-local/**'
       - 'scripts/check_release.py'
+      - 'CITATION.cff'
 permissions:
   contents: read
 concurrency:
@@ -29,6 +30,9 @@ concurrency:
 jobs:
   validate:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -el {0}
     outputs:
       version: ${{ steps.version.outputs.version }}
     steps:
@@ -37,6 +41,12 @@ jobs:
           persist-credentials: false
       - name: Test release guard
         run: python3 -m unittest discover -s tests/release
+      - uses: mamba-org/setup-micromamba@v2
+        with:
+          environment-name: metadata-tools
+          create-args: >-
+            python=3.11 pyyaml
+            -c conda-forge
       - name: Validate source and publication request
         id: version
         env:
