@@ -7,8 +7,10 @@ SCARAB recruits and bins metagenomic contigs using sequence composition, read ab
 Start with a metagenome assembly and its reads. Add trusted genomes to anchor recruitment, then inspect the contig bins and extended partial genomes produced from composition, abundance, and sequence-similarity evidence.
 
 ```{container} primary-workflow
-[![SCARAB workflow](assets/workflow-main.svg)](assets/workflow-main.svg)
+[![SCARAB workflow](assets/workflow-brief.svg)](assets/workflow-brief.svg)
 ```
+
+[Explore the detailed workflow](workflow.md) · [Overview SVG](assets/workflow-brief.svg) · [Overview PDF](assets/workflow-brief.pdf)
 
 ```{toctree}
 :maxdepth: 2

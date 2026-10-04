@@ -1,0 +1,86 @@
+{
+  "title": "SCARAB",
+  "inputs": [
+    "Assembly FASTA + read-library list (paired FASTQs or supported single-file reads)",
+    "Optional: trusted genome/scaffold FASTAs for anchored recruitment"
+  ],
+  "controller": "SCARAB Python controller \u2022 Local command or one Slurm job",
+  "execution": "Input validation \u2022 Output lock and provenance \u2022 Tool threads and worker pools \u2022 Reuse of matching completed runs",
+  "rows": [
+    {
+      "title": "Prepare evidence",
+      "nodes": [
+        {
+          "label": "Assembly + reads;\noptional trusted genomes",
+          "tool": "",
+          "kind": "input"
+        },
+        {
+          "label": "Tile contigs; map reads\nand count tetranucleotides",
+          "tool": "",
+          "kind": "compute"
+        },
+        {
+          "label": "Find MinHash matches\nand trusted anchors",
+          "tool": "",
+          "kind": "compute"
+        },
+        {
+          "label": "Coverage + composition\nfeatures and anchors",
+          "tool": "",
+          "kind": "output"
+        }
+      ]
+    },
+    {
+      "title": "Recruit and bin",
+      "nodes": [
+        {
+          "label": "Features +\nreference parameters",
+          "tool": "",
+          "kind": "input"
+        },
+        {
+          "label": "Resolve AutoOpt settings;\nembed with UMAP",
+          "tool": "",
+          "kind": "compute"
+        },
+        {
+          "label": "HDBSCAN + OC-SVM;\npairwise agreement + anchors",
+          "tool": "",
+          "kind": "compute"
+        },
+        {
+          "label": "De novo / anchored bins\nand extended genomes",
+          "tool": "",
+          "kind": "output"
+        }
+      ]
+    },
+    {
+      "title": "Optional reassembly",
+      "nodes": [
+        {
+          "label": "Extended genomes +\npaired short reads",
+          "tool": "",
+          "kind": "input"
+        },
+        {
+          "label": "Map and select pairs;\nrepair and trim adapters",
+          "tool": "",
+          "kind": "compute"
+        },
+        {
+          "label": "Assemble with\ntrusted contigs (SPAdes)",
+          "tool": "",
+          "kind": "compute"
+        },
+        {
+          "label": "Reassembled sequences,\nsummary and logs",
+          "tool": "",
+          "kind": "output"
+        }
+      ]
+    }
+  ]
+}

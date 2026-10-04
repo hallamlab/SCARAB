@@ -73,8 +73,8 @@
 <text x="160" y="800.0" font-size="27" text-anchor="middle">Feature engineering</text>
 <rect x="313" y="787.0" width="26" height="26" rx="0" fill="#F5F5F5" stroke="#111111" stroke-width="1.5"/>
 <text x="326" y="808.0" font-size="21" text-anchor="middle">3</text>
-<path d="M339 800.0 L380 800.0" fill="none" stroke="#111111" stroke-width="1.5"/>
-<path d="M380 800.0 L380 736.0 L448 736.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M339 800.0 L350 800.0" fill="none" stroke="#111111" stroke-width="1.5"/>
+<path d="M350 800.0 L350 736.0 L448 736.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
 <circle cx="460" cy="736.0" r="12" fill="#DAE8FC" stroke="#6C8EBF" stroke-width="3"/>
 <text x="460" y="686.0" font-size="22" text-anchor="middle">FASTQs +</text>
 <text x="460" y="711.0" font-size="22" text-anchor="middle">assembly windows</text>
@@ -88,7 +88,7 @@
 <path d="M473 736.0 L807 736.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
 <path d="M833 736.0 L1147 736.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
 <path d="M1173 736.0 L1370 736.0 L1370 800.0" fill="none" stroke="#111111" stroke-width="1.5"/>
-<path d="M380 800.0 L380 864.0 L448 864.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M350 800.0 L350 864.0 L448 864.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
 <circle cx="460" cy="864.0" r="12" fill="#DAE8FC" stroke="#6C8EBF" stroke-width="3"/>
 <text x="460" y="814.0" font-size="22" text-anchor="middle">Assembly</text>
 <text x="460" y="839.0" font-size="22" text-anchor="middle">windows</text>
@@ -185,8 +185,8 @@
 <text x="160" y="1660.0" font-size="27" text-anchor="middle">Anchored recruitment</text>
 <rect x="313" y="1647.0" width="26" height="26" rx="0" fill="#F5F5F5" stroke="#111111" stroke-width="1.5"/>
 <text x="326" y="1668.0" font-size="21" text-anchor="middle">7</text>
-<path d="M339 1660.0 L380 1660.0" fill="none" stroke="#111111" stroke-width="1.5"/>
-<path d="M380 1660.0 L380 1596.0 L448 1596.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M339 1660.0 L350 1660.0" fill="none" stroke="#111111" stroke-width="1.5"/>
+<path d="M350 1660.0 L350 1596.0 L448 1596.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
 <circle cx="460" cy="1596.0" r="12" fill="#DAE8FC" stroke="#6C8EBF" stroke-width="3"/>
 <text x="460" y="1546.0" font-size="22" text-anchor="middle">Anchors +</text>
 <text x="460" y="1571.0" font-size="22" text-anchor="middle">embedded windows</text>
@@ -201,7 +201,7 @@
 <path d="M473 1596.0 L807 1596.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
 <path d="M833 1596.0 L1147 1596.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
 <path d="M1173 1596.0 L1370 1596.0 L1370 1660.0" fill="none" stroke="#111111" stroke-width="1.5"/>
-<path d="M380 1660.0 L380 1724.0 L448 1724.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M350 1660.0 L350 1724.0 L448 1724.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
 <circle cx="460" cy="1724.0" r="12" fill="#DAE8FC" stroke="#6C8EBF" stroke-width="3"/>
 <text x="460" y="1674.0" font-size="22" text-anchor="middle">Anchors +</text>
 <text x="460" y="1699.0" font-size="22" text-anchor="middle">embedded windows</text>
