@@ -1,6 +1,6 @@
 # SCARAB: SCaffold-Anchored Recruitment And Binning
 
-**SCARAB 1.0.0 release candidate:** the source installation and public reviewer demo have been tested. Anaconda and Quay publication remains pending; use the source route until registry packages are available.
+**SCARAB 1.0.0:** install the published [Mamba package](installation.md), then run the [bundled recruitment-and-reassembly demo](reviewer-test.md). Docker and Apptainer validation passed; publication of the versioned Quay image is awaiting repository write permission.
 
 SCARAB uses an ensemble of machine-learning methods to recruit metagenomic contigs around trusted genomic scaffolds, such as single-cell amplified genomes (SAGs). It combines sequence similarity, read-derived abundance and nucleotide composition to recover sequence associated with a target population and construct extended partial genomes (xPGs).
 

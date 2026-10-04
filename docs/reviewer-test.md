@@ -7,7 +7,7 @@ SCARAB includes **one bundled demo** that exercises recruitment through guided r
 Use your SCARAB checkout. If you installed only the Mamba package or container, obtain the example from GitHub:
 
 ```bash
-git clone https://github.com/hallamlab/SCARAB.git
+git clone --branch v1.0.0 https://github.com/hallamlab/SCARAB.git
 cd SCARAB
 ```
 

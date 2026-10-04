@@ -1,12 +1,12 @@
 # Installation
 
-**Release preparation:** Anaconda and Quay publication and namespace configuration are pending. The source route is available for testing; registry commands apply once the release is published. Container testing is provided by the release-candidate workflow.
+SCARAB 1.0.0 is available from the [Hallam Lab Anaconda channel](https://anaconda.org/hallamlab/scarab). Its public-channel installation passed the complete reviewer demo. Docker and Apptainer validation also passed, but publication of the `1.0.0` tag in the [Quay repository](https://quay.io/repository/hallamlab/scarab?tab=tags) is awaiting repository write permission.
 
 SCARAB supports Linux. All installation routes provide the same `scarab` CLI and use the dependency versions recorded in this repository. The supported runtime is Python 3.10; the scientific dependency versions are kept consistent across Python, Mamba, Conda recipes, and the container.
 
 ## 1. Released Mamba/Conda package
 
-For a published release in the Hallam Lab channel:
+Install the release from the Hallam Lab channel:
 
 ```bash
 mamba create -n scarab --strict-channel-priority \
@@ -16,13 +16,13 @@ scarab info
 scarab recruit --help
 ```
 
-The Conda package declares the Python libraries and external executables, including minimap2, SAMtools, MetaBAT's depth summarizer, and BBTools. No Git-based pip helper installation is required. Package availability follows release publication; a version prepared in a checkout is not automatically available on Anaconda. To test before publication, use the source route below and review the [release checklist](development.md).
+The Conda package declares the Python libraries and external executables, including minimap2, SAMtools, MetaBAT's depth summarizer, BBTools and SPAdes for guided reassembly. No Git-based pip helper installation is required. Use the pinned version above for the published workflow. The [release checklist](development.md) describes package validation and publication.
 
 Then follow the [same demo test](reviewer-test.md) used by all installation routes.
 
 ## 2. Docker
 
-For a published image tag:
+Once the `1.0.0` tag is published, pull the versioned image:
 
 ```bash
 docker pull quay.io/hallamlab/scarab:1.0.0
@@ -42,7 +42,7 @@ docker run --rm scarab:local scarab recruit --help
 
 ## 3. Apptainer
 
-A published Docker image can be converted once and moved to the cluster:
+Once the `1.0.0` Quay tag is published, its Docker image can be converted once and moved to the cluster:
 
 ```bash
 apptainer pull scarab.sif docker://quay.io/hallamlab/scarab:1.0.0
@@ -63,7 +63,7 @@ This uses the local image archive and does not require uploading it to Quay.
 ## 4. GitHub source installation
 
 ```bash
-git clone https://github.com/hallamlab/SCARAB.git
+git clone --branch v1.0.0 https://github.com/hallamlab/SCARAB.git
 cd SCARAB
 mamba env create -f environment.yml
 mamba activate scarab_cenv
@@ -75,3 +75,7 @@ scarab recruit --help
 `environment.yml` supplies the pinned scientific Python packages and native tools. Pip installs SCARAB into that active environment. Installing with pip alone does not install external mapping and deduplication programs. `scarab_env.yml` is a generated compatibility copy of the same environment specification, not a different installation route.
 
 Run the [demo test](reviewer-test.md), then proceed to [your own inputs](quickstart.md). Before updating a working checkout/environment, stop any runs that use it. Keep separate output directories for different scientific configurations.
+
+## Installation verification
+
+The [1.0.0 publication workflow](https://github.com/hallamlab/SCARAB/actions/runs/37175350192) tests the built Conda package, Docker image and converted Apptainer SIF using the same tiny recruitment-and-guided-reassembly demo. After publication, separate jobs install from the public Anaconda channel and pull the public Quay tag without registry credentials, then run the demo again. This checks both artifact contents and public distribution.

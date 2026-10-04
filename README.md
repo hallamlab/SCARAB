@@ -9,17 +9,18 @@ SCARAB recruits and bins metagenomic contigs using sequence composition, read ab
 Install a released package with Mamba:
 
 ```bash
-mamba create -n scarab -c conda-forge -c bioconda -c hallamlab scarab
+mamba create -n scarab --strict-channel-priority -c conda-forge -c bioconda -c hallamlab scarab=1.0.0
 mamba activate scarab
 scarab recruit --help
 ```
 
-Version 1.0.0 is being validated; Anaconda and Quay publication is pending. The user guide covers source installation, Docker, Apptainer, and the reviewer dataset.
+SCARAB 1.0.0 is available from [Anaconda](https://anaconda.org/hallamlab/scarab). The Docker and Apptainer demos passed; publishing the `1.0.0` Quay tag is awaiting repository write permission. The user guide covers Docker, Apptainer, source installation and the reviewer dataset.
 
-The tiny recruitment-and-reassembly demo is bundled in `examples/reviewer/demo/` (about 1.7 MiB). No separate data download is needed. From this checkout:
+The tiny recruitment-and-reassembly demo is bundled in `examples/reviewer/demo/` (about 1.7 MiB). No separate data download is needed. To obtain the example matching the release:
 
 ```bash
-cd examples/reviewer/demo
+git clone --branch v1.0.0 https://github.com/hallamlab/SCARAB.git
+cd SCARAB/examples/reviewer/demo
 scarab recruit -m k12.gold_assembly.fasta -l read_list.txt -s SAG -o SCARAB_out -t 4
 scarab reassemble \
   -i SCARAB_out/algo_defaults/Default/xpgs/ecoli-COLI-K12.3578.intersect.xPG.fasta \

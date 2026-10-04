@@ -69,7 +69,7 @@ The workflow defaults to Anaconda owner `hallamlab` and image repository `quay.i
 
 The **Build and validate release candidates** workflow runs automatically for container/build-configuration changes on `docs/user-guide`. It can also be run manually after its workflow file is present on the repository's default branch. Leave **publish_anaconda** and **publish_quay** unchecked.
 
-It builds/tests the Conda package, runs regression tests and the public demo in Docker, converts that same image to an Apptainer SIF, and runs the demo again in Apptainer. Both container runs use the same result validator as the source route. Packages, the Docker archive, the SIF, checksums, and reviewer logs are retained as workflow artifacts for seven days. Build-only runs need no registry credentials.
+It builds/tests the Conda package, installs that package into a fresh Mamba environment and runs the complete recruitment-and-reassembly demo. It also runs regression tests and the same demo in Docker, converts that image to an Apptainer SIF, and runs the demo again in Apptainer. Both container runs use the same result validator as the source route. Packages, the Docker archive, the SIF, checksums, and reviewer logs are retained as workflow artifacts for seven days. Build-only runs need no registry credentials.
 
 The ordinary test workflow separately exercises the source install, unit tests, public reviewer demo, and documentation. The Python artifact workflow verifies source/wheel contents.
 
@@ -78,9 +78,9 @@ The ordinary test workflow separately exercises the source install, unit tests, 
 1. Review the tests and merge the approved changes into the production branch.
 2. Create the matching version tag (for version 1.0.0, `v1.0.0`).
 3. In **Actions → Build and validate release candidates → Run workflow**, select that tag and check **publish_anaconda**, **publish_quay**, or both.
-4. The workflow rebuilds and validates the artifacts. The publication job runs only after both Conda and container checks succeed and any configured `release` environment approval is granted.
+4. The workflow rebuilds and validates the artifacts. Each publication job runs after its corresponding artifact checks succeed and any configured `release` environment approval is granted.
 5. It verifies checksums and the Docker source/version labels, then uploads the Conda package and pushes the tested versioned image to Quay.
-6. Verify clean installations from both registries before announcing availability. Enable the corresponding Read the Docs version; create a GitHub release and use Zenodo integration separately when ready.
+6. The `verify_anaconda` and `verify_quay` jobs download the public artifacts without registry credentials and run recruitment plus guided reassembly. Confirm these clean-install checks pass before announcing availability. Enable the corresponding Read the Docs version; create a GitHub release and use Zenodo integration separately when ready.
 
 The release guard rejects publication from a branch, a mismatched tag, or a different repository. Ordinary pushes and build-only runs do not publish, create tags, merge code, or create GitHub releases. No `latest` image tag is changed. Anaconda and Quay use independent publishing jobs. Use **Re-run failed jobs** to retry the failed upload using the original tested artifacts while they remain available (seven days), without rebuilding or repeating the successful registry upload. Do not use **Re-run all jobs** for an upload retry. If an upload completed before its job failed, inspect the registry before retrying; the workflow does not force-overwrite Conda packages.
 
