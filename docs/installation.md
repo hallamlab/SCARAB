@@ -1,6 +1,6 @@
 # Installation
 
-SCARAB 1.0.0 is available from the [Hallam Lab Anaconda channel](https://anaconda.org/hallamlab/scarab). Its public-channel installation passed the complete reviewer demo. Docker and Apptainer validation also passed, but publication of the `1.0.0` tag in the [Quay repository](https://quay.io/repository/hallamlab/scarab?tab=tags) is awaiting repository write permission.
+SCARAB 1.0.0 is available from the [Hallam Lab Anaconda channel](https://anaconda.org/hallamlab/scarab) and [Quay repository](https://quay.io/repository/hallamlab/scarab?tab=tags). Use Mamba for a native installation, Docker for a container, or Apptainer for HPC.
 
 SCARAB supports Linux. All installation routes provide the same `scarab` CLI and use the dependency versions recorded in this repository. The supported runtime is Python 3.10; the scientific dependency versions are kept consistent across Python, Mamba, Conda recipes, and the container.
 
@@ -22,7 +22,7 @@ Then follow the [same demo test](reviewer-test.md) used by all installation rout
 
 ## 2. Docker
 
-Once the `1.0.0` tag is published, pull the versioned image:
+Pull the versioned image:
 
 ```bash
 docker pull quay.io/hallamlab/scarab:1.0.0
@@ -42,7 +42,7 @@ docker run --rm scarab:local scarab recruit --help
 
 ## 3. Apptainer
 
-Once the `1.0.0` Quay tag is published, its Docker image can be converted once and moved to the cluster:
+Convert the versioned Docker image once, then move the SIF to the cluster:
 
 ```bash
 apptainer pull scarab.sif docker://quay.io/hallamlab/scarab:1.0.0

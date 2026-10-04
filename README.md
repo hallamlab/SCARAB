@@ -14,7 +14,7 @@ mamba activate scarab
 scarab recruit --help
 ```
 
-SCARAB 1.0.0 is available from [Anaconda](https://anaconda.org/hallamlab/scarab). The Docker and Apptainer demos passed; publishing the `1.0.0` Quay tag is awaiting repository write permission. The user guide covers Docker, Apptainer, source installation and the reviewer dataset.
+SCARAB 1.0.0 is available from [Anaconda](https://anaconda.org/hallamlab/scarab) and [Quay](https://quay.io/repository/hallamlab/scarab?tab=tags). The user guide covers Docker, Apptainer, source installation and the reviewer dataset.
 
 The tiny recruitment-and-reassembly demo is bundled in `examples/reviewer/demo/` (about 1.7 MiB). No separate data download is needed. To obtain the example matching the release:
 
