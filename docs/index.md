@@ -1,4 +1,4 @@
-# SCARAB: Scaffold-Anchored Recruitment and Binning
+# SCARAB: SCaffold-Anchored Recruitment And Binning
 
 **SCARAB 1.0.0 release candidate:** the source installation and public reviewer demo have been tested. Anaconda and Quay publication remains pending; use the source route until registry packages are available.
 
