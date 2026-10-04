@@ -29,7 +29,7 @@ The method and setting names are resolved by AutoOpt and printed in the log. Som
 | `*.denovo_clusters.tsv` and `*.denovo_noise.tsv` | De novo assignments and unassigned/noise records. |
 | `*.hdbscan_clusters.tsv` | Trusted-anchor HDBSCAN assignments. |
 | `*.ocsvm_clusters.tsv` | One-class SVM recruitment assignments. |
-| `*.inter_clusters.tsv` | Combined/intersection recruitment evidence. |
+| `*.inter_clusters.tsv` | Pairwise-agreement recruitment plus qualifying anchors; see the workflow set formula. |
 | `*.denovo.fasta` | Original contigs assigned to de novo bins. |
 | `*.hdbscan.fasta`, `*.ocsvm.fasta`, `*.intersect.fasta` | Recruited contig sets from the anchored approaches. |
 | `*.xPG.fasta` | Trusted reference plus recruits after BBTools deduplication. |
@@ -37,3 +37,5 @@ The method and setting names are resolved by AutoOpt and printed in the log. Som
 Recruited FASTAs and xPG FASTAs answer different questions: the first contains recruited metagenomic sequence; the latter also contains the trusted reference. The deduplication command uses a 97% minimum identity setting. Independently validate genome quality and interpret overlap between recruitment approaches.
 
 The abundance stage removes SAM/BAM and selected tool-output intermediates after coverage generation. Retain final FASTAs, assignment tables, logs, input manifests, and the software revision for downstream review. Avoid manually pruning a partially completed output if you intend to reuse it.
+
+For guided assemblies derived from these products, see [reassembly](reassembly.md).

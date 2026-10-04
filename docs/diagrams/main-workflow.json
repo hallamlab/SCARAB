@@ -1,40 +1,352 @@
 {
   "title": "SCARAB",
+  "inputs": [
+    "Assembly FASTA + read-library list (paired FASTQs or supported single-file reads)",
+    "Optional: trusted genome/scaffold FASTAs for anchored recruitment"
+  ],
+  "controller": "SCARAB Python controller • Local command or one Slurm job",
+  "execution": "Input validation • Output lock and provenance • Tool threads and worker pools • Reuse of matching completed runs",
   "rows": [
-    [
-      "Sequence and read inputs",
-      "Assembly + FASTQs + optional trusted genomes",
-      "One metagenome assembly; tab-separated read list; optional SAG/reference FASTAs."
-    ],
-    [
-      "Sequence windows and anchors",
-      "Subcontigs + sourmash MinHash",
-      "Length filtering and overlapping windows; trusted sequence matches where available."
-    ],
-    [
-      "Abundance and composition",
-      "Read coverage + tetranucleotide frequencies",
-      "minimap2 \u2192 SAMtools \u2192 MetaBAT depth summary; standardized feature matrices."
-    ],
-    [
-      "Parameter selection",
-      "Abundance entropy and AutoOpt",
-      "Bundled reference tables select algorithm defaults or calibrated parameter sets."
-    ],
-    [
-      "Recruitment and clustering",
-      "UMAP, HDBSCAN, and one-class SVM",
-      "De novo bins; trusted-anchor recruitment; combination/intersection of evidence."
-    ],
-    [
-      "Contig and xPG products",
-      "Original-contig FASTAs + extended partial genomes",
-      "Compile assignments; combine trusted sequence with recruits; BBTools deduplication."
-    ],
-    [
-      "Review and downstream analysis",
-      "Logs, assignment tables, and FASTA outputs",
-      "Validate genome quality independently; retain input and parameter provenance."
-    ]
+    {
+      "title": "Contig tiling",
+      "note": "Defaults: 10 kb windows; 2 kb overlap; 2 kb minimum length",
+      "nodes": [
+        {
+          "label": "Assembly + optional\ntrusted scaffolds",
+          "tool": "",
+          "kind": "input"
+        },
+        {
+          "label": "Filter by length",
+          "tool": "min_len",
+          "kind": "compute"
+        },
+        {
+          "label": "Create overlapping\nsequence windows",
+          "tool": "build_subcontigs",
+          "kind": "compute"
+        },
+        {
+          "label": "Assembly windows +\ntrusted windows",
+          "tool": "",
+          "kind": "output"
+        }
+      ]
+    },
+    {
+      "title": "Sequence anchors",
+      "note": "Optional: requires trusted references with usable matches",
+      "nodes": [
+        {
+          "label": "Trusted windows +\nassembly contigs",
+          "tool": "",
+          "kind": "input"
+        },
+        {
+          "label": "Create MinHash\nsignatures",
+          "tool": "sourmash",
+          "kind": "compute"
+        },
+        {
+          "label": "Index assembly +\nsearch similarities",
+          "tool": "SBT; Jaccard / containment",
+          "kind": "compute"
+        },
+        {
+          "label": "Select qualifying\ntrusted anchors",
+          "tool": "minimum similarity",
+          "kind": "compute"
+        },
+        {
+          "label": "Candidate matches +\nhigh-similarity anchors",
+          "tool": "",
+          "kind": "output"
+        }
+      ]
+    },
+    {
+      "title": "Feature engineering",
+      "note": "Reads map to assembly windows; composition is computed from the same windows",
+      "lanes": [
+        [
+          {
+            "label": "FASTQs +\nassembly windows",
+            "tool": "",
+            "kind": "input"
+          },
+          {
+            "label": "Map reads; sort BAM",
+            "tool": "minimap2; SAMtools",
+            "kind": "compute"
+          },
+          {
+            "label": "Summarize + scale\ncoverage",
+            "tool": "MetaBAT depth; StandardScaler",
+            "kind": "compute"
+          }
+        ],
+        [
+          {
+            "label": "Assembly\nwindows",
+            "tool": "",
+            "kind": "input"
+          },
+          {
+            "label": "Count canonical\ntetranucleotides",
+            "tool": "136 features; pseudocount",
+            "kind": "compute"
+          },
+          {
+            "label": "Transform + scale\ncomposition",
+            "tool": "CLR; StandardScaler",
+            "kind": "compute"
+          }
+        ]
+      ],
+      "result": "Abundance +\ncomposition matrices"
+    },
+    {
+      "title": "Parameter selection",
+      "note": "Reference-based selection does not retrain against ground truth for the new sample",
+      "nodes": [
+        {
+          "label": "Raw coverage +\nbundled reference tables",
+          "tool": "",
+          "kind": "input"
+        },
+        {
+          "label": "Calculate diversity\nprofiles",
+          "tool": "Rényi entropy",
+          "kind": "compute"
+        },
+        {
+          "label": "Resolve AutoOpt\nmethod + preset",
+          "tool": "defaults / reference matching",
+          "kind": "compute"
+        },
+        {
+          "label": "Apply explicit\nparameter overrides",
+          "tool": "HDBSCAN; OC-SVM",
+          "kind": "compute"
+        },
+        {
+          "label": "Effective clustering\nparameters",
+          "tool": "",
+          "kind": "output"
+        }
+      ]
+    },
+    {
+      "title": "Feature embedding",
+      "note": "With references, candidate MinHash hits inform the feature subset",
+      "nodes": [
+        {
+          "label": "Scaled coverage +\ncomposition matrices",
+          "tool": "",
+          "kind": "input"
+        },
+        {
+          "label": "Embed each\nfeature view",
+          "tool": "UMAP",
+          "kind": "compute"
+        },
+        {
+          "label": "Join embeddings\nby window ID",
+          "tool": "shared feature space",
+          "kind": "compute"
+        },
+        {
+          "label": "Combined window\nembedding",
+          "tool": "",
+          "kind": "output"
+        }
+      ]
+    },
+    {
+      "title": "De novo clustering",
+      "note": "",
+      "nodes": [
+        {
+          "label": "Combined\nembedding",
+          "tool": "",
+          "kind": "input"
+        },
+        {
+          "label": "Density clustering",
+          "tool": "HDBSCAN",
+          "kind": "compute"
+        },
+        {
+          "label": "Resolve window votes\nto original contigs",
+          "tool": "membership / denoising",
+          "kind": "compute"
+        },
+        {
+          "label": "Separate noise\nfrom assigned contigs",
+          "tool": "SCARAB",
+          "kind": "compute"
+        },
+        {
+          "label": "De novo bins +\nunassigned records",
+          "tool": "",
+          "kind": "output"
+        }
+      ]
+    },
+    {
+      "title": "Anchored recruitment",
+      "note": "Optional: both branches use qualifying anchors and the shared embedding",
+      "lanes": [
+        [
+          {
+            "label": "Anchors +\nembedded windows",
+            "tool": "",
+            "kind": "input"
+          },
+          {
+            "label": "Fit anchored\ndensity clusters",
+            "tool": "HDBSCAN",
+            "kind": "compute"
+          },
+          {
+            "label": "Resolve cluster /\nanchor assignments",
+            "tool": "SCARAB",
+            "kind": "compute"
+          }
+        ],
+        [
+          {
+            "label": "Anchors +\nembedded windows",
+            "tool": "",
+            "kind": "input"
+          },
+          {
+            "label": "Train anchor model;\npredict inliers",
+            "tool": "OneClassSVM",
+            "kind": "compute"
+          },
+          {
+            "label": "Resolve window\nsupport per contig",
+            "tool": "SCARAB",
+            "kind": "compute"
+          }
+        ]
+      ],
+      "result": "HDBSCAN + OC-SVM\nrecruitment tables"
+    },
+    {
+      "title": "Evidence combination",
+      "note": "The intersect product is not a strict three-way intersection",
+      "nodes": [
+        {
+          "label": "MinHash + HDBSCAN\n+ OC-SVM sets",
+          "tool": "",
+          "kind": "input"
+        },
+        {
+          "label": "Pairwise set\nintersections",
+          "tool": "three evidence pairs",
+          "kind": "compute"
+        },
+        {
+          "label": "Union supported sets;\nretain trusted anchors",
+          "tool": "SCARAB",
+          "kind": "compute"
+        },
+        {
+          "label": "Combined\nrecruitment table",
+          "tool": "",
+          "kind": "output"
+        }
+      ]
+    },
+    {
+      "title": "Sequence products",
+      "note": "",
+      "nodes": [
+        {
+          "label": "Assignment tables +\noriginal FASTAs",
+          "tool": "",
+          "kind": "input"
+        },
+        {
+          "label": "Recover original\nmetagenomic contigs",
+          "tool": "compile_recruits",
+          "kind": "compute"
+        },
+        {
+          "label": "Combine trusted\nsequence + recruits",
+          "tool": "anchored outputs only",
+          "kind": "compute"
+        },
+        {
+          "label": "Remove redundant\nsequence",
+          "tool": "BBTools dedupe",
+          "kind": "compute"
+        },
+        {
+          "label": "Bin FASTAs +\nextended partial genomes",
+          "tool": "",
+          "kind": "output"
+        }
+      ]
+    },
+    {
+      "title": "Guided reassembly",
+      "note": "Optional: scarab reassemble; paired short reads; same installed environment",
+      "nodes": [
+        {
+          "label": "xPG / trusted FASTA +\npaired short reads",
+          "tool": "",
+          "kind": "input"
+        },
+        {
+          "label": "Map; select pairs;\nrecover FASTQs",
+          "tool": "minimap2; SAMtools",
+          "kind": "compute"
+        },
+        {
+          "label": "Repair pairs; trim\nadapters and quality",
+          "tool": "BBTools",
+          "kind": "compute"
+        },
+        {
+          "label": "Assemble using\ntrusted contigs",
+          "tool": "SPAdes --isolate",
+          "kind": "compute"
+        },
+        {
+          "label": "Contigs, scaffolds +\nreassembly summary",
+          "tool": "",
+          "kind": "output"
+        }
+      ]
+    },
+    {
+      "title": "Review and export",
+      "note": "Genome quality control and biological interpretation remain downstream user analyses",
+      "nodes": [
+        {
+          "label": "FASTA products +\nassignment tables",
+          "tool": "",
+          "kind": "input"
+        },
+        {
+          "label": "Inspect recruitment\nevidence and parameters",
+          "tool": "logs; run manifest",
+          "kind": "compute"
+        },
+        {
+          "label": "Validate genome\nquality independently",
+          "tool": "downstream user analysis",
+          "kind": "compute"
+        },
+        {
+          "label": "Sequences and tables\nfor downstream analyses",
+          "tool": "",
+          "kind": "output"
+        }
+      ]
+    }
   ]
 }

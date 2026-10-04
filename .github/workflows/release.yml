@@ -100,6 +100,8 @@ jobs:
           docker run --rm scarab:candidate scarab info
           docker run --rm scarab:candidate scarab recruit --help
           docker run --rm -v "$PWD/tests:/tests:ro" scarab:candidate python -m unittest discover -s /tests -p 'test_*.py'
+      - name: Test guided reassembly in Docker
+        run: docker run --rm -u "$(id -u):$(id -g)" -v "$PWD/tests:/tests:ro" scarab:candidate python /tests/reassembly_smoke.py
       - name: Run reviewer test in Docker
         run: |
           python3 scripts/prepare_reviewer.py --output "$RUNNER_TEMP/scarab-reviewer"

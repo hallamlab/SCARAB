@@ -21,6 +21,7 @@ jobs:
           python -m pip install --no-deps --no-build-isolation .
           python scripts/render_packaging.py --check
           python -m unittest discover -s tests -p 'test_*.py'
+          python tests/reassembly_smoke.py
           scarab info
           scarab recruit --help
       - name: Run the public reviewer demo

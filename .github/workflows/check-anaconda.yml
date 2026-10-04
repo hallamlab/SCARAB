@@ -1,4 +1,4 @@
-name: Check Anaconda credential (no upload)
+name: Check registry credentials (no upload)
 on:
   workflow_dispatch:
   push:
@@ -22,3 +22,20 @@ jobs:
           ANACONDA_API_TOKEN: ${{ secrets.ANACONDA_API_TOKEN }}
           ANACONDA_OWNER: ${{ vars.ANACONDA_OWNER || 'hallamlab' }}
         run: python3 scripts/check_anaconda.py
+  quay:
+    runs-on: ubuntu-latest
+    environment: release
+    timeout-minutes: 5
+    steps:
+      - name: Authenticate Quay robot without uploading
+        env:
+          QUAY_USERNAME: ${{ secrets.QUAY_USERNAME }}
+          QUAY_PASSWORD: ${{ secrets.QUAY_PASSWORD }}
+        run: |
+          test -n "$QUAY_USERNAME" || { echo 'Missing QUAY_USERNAME'; exit 1; }
+          test -n "$QUAY_PASSWORD" || { echo 'Missing QUAY_PASSWORD'; exit 1; }
+          export DOCKER_CONFIG="$RUNNER_TEMP/scarab-quay-check"
+          mkdir -p "$DOCKER_CONFIG"
+          trap 'rm -rf "$DOCKER_CONFIG"' EXIT
+          printf '%s' "$QUAY_PASSWORD" | docker login quay.io --username "$QUAY_USERNAME" --password-stdin
+          echo 'Quay accepted the robot credential. No image uploaded; repository write access must also be granted in Quay.'

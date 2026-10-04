@@ -9,13 +9,15 @@ import sys
 import warnings
 warnings.filterwarnings('ignore')
 from scarab.commands import (info, recruit)
+from scarab.reassemble import reassemble
 
 logger = logging.getLogger(__name__)
 
 usage = """
 scarab <command> [<args>]
 ** Commands include:
-recruit        Recruit environmental reads to reference SAG(s).
+recruit        Recruit metagenomic contigs using optional trusted genomes.
+reassemble     Guided short-read reassembly of recruited/trusted genome FASTAs.
 ** Other commands:
 info           Display SCARAB version and other information.
 help           Return this message.
@@ -24,7 +26,7 @@ Use '-h' to get subcommand-specific help, e.g.
 
 
 def main():
-    commands = {"recruit": recruit,
+    commands = {"recruit": recruit, "reassemble": reassemble,
                 "info": info}
     parser = argparse.ArgumentParser(description='Recruit environmental reads to reference SAG(s).',
                                      add_help=False

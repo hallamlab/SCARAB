@@ -1,9 +1,9 @@
-%%{init: {"theme":"base","themeVariables":{"fontFamily":"Georgia, serif","fontSize":"18px","primaryColor":"#d9e5ef","primaryTextColor":"#111111","primaryBorderColor":"#777777","lineColor":"#777777","secondaryColor":"#dceadb","tertiaryColor":"#f5e5cb","edgeLabelBackground":"#ffffff"},"flowchart":{"htmlLabels":false,"curve":"linear"}}}%%
+%%{init: {"theme":"base","themeVariables":{"fontFamily":"Times New Roman, Times, serif","fontSize":"18px","primaryColor":"#DAE8FC","primaryTextColor":"#111111","primaryBorderColor":"#666666","lineColor":"#111111","secondaryColor":"#D5E8D4","tertiaryColor":"#F5F5F5","edgeLabelBackground":"#ffffff"},"flowchart":{"htmlLabels":false,"curve":"linear"}}}%%
 flowchart TB
  A["User: assembly, reads manifest, trusted FASTAs"] --> B["Installed scarab CLI"]
  B --> C["Input validation + output lock/provenance"]
  C --> D["Python recruitment controller"]
- D --> E["External tools: minimap2, SAMtools, MetaBAT depth, BBTools"]
+ D --> E["External tools: minimap2, SAMtools, MetaBAT depth, BBTools; optional SPAdes"]
  D --> F["Python: sourmash, UMAP, HDBSCAN, scikit-learn"]
  E --> G["Output files and runtime log"]
  F --> G

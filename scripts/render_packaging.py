@@ -36,6 +36,8 @@ requirements:
   commands:
     - scarab info
     - scarab recruit --help
+    - scarab reassemble --help
+    - spades.py --version
     - minimap2 --version
     - samtools --version
     - command -v jgi_summarize_bam_contig_depths

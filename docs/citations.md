@@ -22,3 +22,8 @@ Record the SCARAB repository revision or release with your methods, and cite the
 | scikit-bio, Numba, pyfastx, screed | Composition utilities, compiled numerical routines, and sequence I/O | [scikit-bio](https://scikit.bio/), [Numba](https://numba.pydata.org/), [pyfastx](https://github.com/lmdu/pyfastx), [screed](https://github.com/dib-lab/screed). |
 
 Mamba manages software environments; see the [Mamba project](https://github.com/mamba-org/mamba). Record environment specifications and actual versions alongside scientific citations.
+
+Guided reassembly additionally uses [SPAdes](https://github.com/ablab/spades);
+follow its [citation guidance](https://ablab.github.io/spades/citation.html).
+Read selection and quality trimming also use minimap2, SAMtools and BBTools
+as listed above.

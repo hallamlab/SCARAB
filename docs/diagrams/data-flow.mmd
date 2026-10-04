@@ -1,8 +1,8 @@
-%%{init: {"theme":"base","themeVariables":{"fontFamily":"Georgia, serif","fontSize":"18px","primaryColor":"#d9e5ef","primaryTextColor":"#111111","primaryBorderColor":"#777777","lineColor":"#777777","secondaryColor":"#dceadb","tertiaryColor":"#f5e5cb","edgeLabelBackground":"#ffffff"},"flowchart":{"htmlLabels":false,"curve":"linear"}}}%%
+%%{init: {"theme":"base","themeVariables":{"fontFamily":"Times New Roman, Times, serif","fontSize":"18px","primaryColor":"#DAE8FC","primaryTextColor":"#111111","primaryBorderColor":"#666666","lineColor":"#111111","secondaryColor":"#D5E8D4","tertiaryColor":"#F5F5F5","edgeLabelBackground":"#ffffff"},"flowchart":{"htmlLabels":false,"curve":"linear"}}}%%
 flowchart TB
  A["Assembly FASTA"] --> B["Length filtering + overlapping subcontigs"]
  C["Optional trusted FASTAs"] --> D["sourmash MinHash anchors"]
- B --> D
+ A --> D
  E["FASTQ read manifest"] --> F["minimap2 → SAMtools → MetaBAT depth summary"]
  B --> F
  B --> G["Tetranucleotide composition"]
@@ -14,8 +14,15 @@ flowchart TB
  I --> K["Anchored HDBSCAN + one-class SVM"]
  D --> K
  J --> L["Original-contig de novo FASTAs"]
- K --> M["Anchored and intersection assignments"]
+ K --> M["Anchored and pairwise-agreement assignments"]
  M --> N["Recruited contig FASTAs"]
  N --> O["Combine with trusted reference + BBTools deduplication"]
  C --> O
  O --> P["Extended partial genome FASTAs"]
+
+ P -.-> R
+ E -.-> R
+ R["Optional scarab reassemble: xPG FASTAs + short reads"] --> S["minimap2 / SAMtools: select both-mapped primary pairs"]
+ S --> T["BBTools: repair and trim"]
+ T --> U["SPAdes isolate mode + trusted contigs"]
+ U --> V["Guided contigs / scaffolds + per-genome status"]

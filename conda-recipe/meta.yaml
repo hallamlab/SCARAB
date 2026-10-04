@@ -35,6 +35,7 @@ requirements:
     - metabat2 2.15
     - bbmap 39.01
     - seqkit 2.4.0
+    - spades 3.15.5
 test:
   imports:
     - scarab.commands
@@ -43,6 +44,8 @@ test:
   commands:
     - scarab info
     - scarab recruit --help
+    - scarab reassemble --help
+    - spades.py --version
     - minimap2 --version
     - samtools --version
     - command -v jgi_summarize_bam_contig_depths

@@ -80,3 +80,8 @@ Miscellaneous options:
   -v, --verbose  Prints a more verbose runtime log
   -h, --help     Show this help message and exit
 ```
+
+## Guided reassembly
+
+`scarab reassemble --help` lists the integrated reassembly command. See the
+[reassembly guide](reassembly.md) for inputs, resources, filtering, outputs and reruns.

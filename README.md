@@ -2,7 +2,7 @@
 
 **1.0.0 release candidate:** the source installation and reviewer demo have been tested. Anaconda and Quay publication is pending; registry commands apply once the release is available.
 
-SCARAB recruits metagenomic reads using single-cell amplified genomes as references.
+SCARAB recruits and bins metagenomic contigs using sequence composition, read abundance, and optional trusted genomes such as SAGs.
 
 Its recruitment workflow combines assembly composition, read-coverage profiles, and optional trusted-genome anchors to recover metagenomic contigs and extended partial genomes (xPGs).
 
@@ -40,3 +40,6 @@ For your own data, provide an assembly FASTA, a text list of FASTQ paths, and op
 The [user guide](docs/index.md) covers [installation](docs/installation.md), the [reviewer test](docs/reviewer-test.md), [parameters](docs/parameters.md), [outputs](docs/outputs.md), and [HPC execution and reruns](docs/resources.md).
 
 Documentation source lives in `docs/`. [Report issues or request features](https://github.com/hallamlab/SCARAB/issues).
+
+Optional guided reassembly runs in the same environment: `scarab reassemble --help`.
+See the [guided reassembly guide](docs/reassembly.md).
