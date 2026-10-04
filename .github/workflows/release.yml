@@ -56,6 +56,8 @@ jobs:
     needs: validate
     runs-on: ubuntu-latest
     timeout-minutes: 60
+    env:
+      VERSION: ${{ needs.validate.outputs.version }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -69,6 +71,17 @@ jobs:
       - name: Build and test local recipe
         shell: bash -el {0}
         run: conda build conda-recipe-local --override-channels -c conda-forge -c bioconda --no-anaconda-upload --output-folder dist/conda
+      - name: Install built package and run the complete reviewer demo
+        shell: bash -el {0}
+        run: |
+          conda index dist/conda
+          micromamba create --yes --prefix "$RUNNER_TEMP/scarab-package" --override-channels --strict-channel-priority \
+            -c "file://$PWD/dist/conda" -c conda-forge -c bioconda "scarab=$VERSION"
+          python3 scripts/prepare_reviewer.py --output "$RUNNER_TEMP/scarab-conda-reviewer"
+          cd "$RUNNER_TEMP/scarab-conda-reviewer/demo"
+          micromamba run --prefix "$RUNNER_TEMP/scarab-package" scarab recruit -m k12.gold_assembly.fasta -l read_list.txt -s SAG -o SCARAB_out -t 2
+          micromamba run --prefix "$RUNNER_TEMP/scarab-package" scarab reassemble -i SCARAB_out/algo_defaults/Default/xpgs/ecoli-COLI-K12.3578.intersect.xPG.fasta -l read_list.txt -o reassembly -t 2 --memory 4
+          python3 "$GITHUB_WORKSPACE/scripts/validate_reviewer.py" --dataset . --output SCARAB_out --reassembly reassembly
       - name: Record package checksum
         run: |
           cd dist/conda/noarch
@@ -208,3 +221,46 @@ jobs:
           printf '%s' "$QUAY_PASSWORD" | docker login quay.io --username "$QUAY_USERNAME" --password-stdin
           docker tag scarab:candidate "$QUAY_REPOSITORY:$VERSION"
           docker push "$QUAY_REPOSITORY:$VERSION"
+  verify_anaconda:
+    needs: [validate, anaconda]
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: mamba-org/setup-micromamba@v2
+      - name: Install public Anaconda package and run reviewer demo
+        env:
+          VERSION: ${{ needs.validate.outputs.version }}
+          ANACONDA_OWNER: ${{ vars.ANACONDA_OWNER || 'hallamlab' }}
+        run: |
+          micromamba create --yes --prefix "$RUNNER_TEMP/scarab-public" --override-channels --strict-channel-priority \
+            -c conda-forge -c bioconda -c "$ANACONDA_OWNER" "scarab=$VERSION"
+          micromamba list --prefix "$RUNNER_TEMP/scarab-public"
+          python3 scripts/prepare_reviewer.py --output "$RUNNER_TEMP/scarab-public-demo"
+          cd "$RUNNER_TEMP/scarab-public-demo/demo"
+          micromamba run --prefix "$RUNNER_TEMP/scarab-public" scarab recruit -m k12.gold_assembly.fasta -l read_list.txt -s SAG -o SCARAB_out -t 2
+          micromamba run --prefix "$RUNNER_TEMP/scarab-public" scarab reassemble -i SCARAB_out/algo_defaults/Default/xpgs/ecoli-COLI-K12.3578.intersect.xPG.fasta -l read_list.txt -o reassembly -t 2 --memory 4
+          python3 "$GITHUB_WORKSPACE/scripts/validate_reviewer.py" --dataset . --output SCARAB_out --reassembly reassembly
+  verify_quay:
+    needs: [validate, quay]
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Pull public Quay image and run reviewer demo
+        env:
+          VERSION: ${{ needs.validate.outputs.version }}
+          QUAY_REPOSITORY: ${{ vars.QUAY_REPOSITORY || 'quay.io/hallamlab/scarab' }}
+        run: |
+          image="$QUAY_REPOSITORY:$VERSION"
+          docker pull "$image"
+          test "$(docker inspect --format '{{index .Config.Labels "org.opencontainers.image.revision"}}' "$image")" = "$GITHUB_SHA"
+          python3 scripts/prepare_reviewer.py --output "$RUNNER_TEMP/scarab-public-demo"
+          cd "$RUNNER_TEMP/scarab-public-demo/demo"
+          docker run --rm -u "$(id -u):$(id -g)" -v "$PWD:$PWD" -w "$PWD" "$image" scarab recruit -m k12.gold_assembly.fasta -l read_list.txt -s SAG -o SCARAB_out -t 2
+          docker run --rm -u "$(id -u):$(id -g)" -v "$PWD:$PWD" -w "$PWD" "$image" scarab reassemble -i SCARAB_out/algo_defaults/Default/xpgs/ecoli-COLI-K12.3578.intersect.xPG.fasta -l read_list.txt -o reassembly -t 2 --memory 4
+          python3 "$GITHUB_WORKSPACE/scripts/validate_reviewer.py" --dataset . --output SCARAB_out --reassembly reassembly

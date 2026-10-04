@@ -2,9 +2,13 @@
 
 **SCARAB 1.0.0 release candidate:** the source installation and public reviewer demo have been tested. Anaconda and Quay publication remains pending; use the source route until registry packages are available.
 
-SCARAB recruits and bins metagenomic contigs using sequence composition, read abundance, and optional trusted genomes such as SAGs.
+SCARAB uses an ensemble of machine-learning methods to recruit metagenomic contigs around trusted genomic scaffolds, such as single-cell amplified genomes (SAGs). It combines sequence similarity, read-derived abundance and nucleotide composition to recover sequence associated with a target population and construct extended partial genomes (xPGs).
 
-Start with a metagenome assembly and its reads. Add trusted genomes to anchor recruitment, then inspect the contig bins and extended partial genomes produced from composition, abundance, and sequence-similarity evidence.
+MinHash searches identify candidate contigs and high-similarity anchors. Coverage and tetranucleotide-composition features are transformed, scaled and embedded with Uniform Manifold Approximation and Projection (UMAP). Density-based clustering (HDBSCAN) identifies groups of related sequence windows, while a one-class support vector machine (OC-SVM) learns the feature distribution of anchor-associated windows. Combined recruitment retains contigs supported by at least two of the MinHash, HDBSCAN and OC-SVM evidence sets, together with qualifying anchors. HDBSCAN also provides de novo bins when trusted anchors are unavailable.
+
+AutoOpt can select clustering settings using Rényi entropy profiles of read abundance and bundled reference calibrations; explicit parameter overrides remain available. The optional guided-reassembly step maps paired reads to an xPG and runs SPAdes with trusted contigs. Recruitment and reassembly produce candidates for downstream genome-quality assessment and biological interpretation. See the [detailed workflow](workflow.md), [parameter guide](parameters.md) and [method citations](citations.md) for the algorithms and their assumptions.
+
+Start with [installation](installation.md) and the [tiny end-to-end reviewer test](reviewer-test.md), then adapt the [input guide](inputs.md) to your own assembly, reads and optional trusted genomes.
 
 ```{container} primary-workflow
 [![SCARAB workflow](assets/workflow-brief.svg)](assets/workflow-brief.svg)
