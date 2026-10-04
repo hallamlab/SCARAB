@@ -1,4 +1,4 @@
-# SCARAB
+# SCARAB: Scaffold-Anchored Recruitment and Binning
 
 SCARAB recruits and bins metagenomic contigs using sequence composition, read abundance, and optional trusted genomes such as SAGs. It produces extended partial genomes (xPGs) and supports optional guided reassembly in the same environment.
 
