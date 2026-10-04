@@ -67,7 +67,7 @@ The workflow defaults to Anaconda owner `hallamlab` and image repository `quay.i
 
 ## Build candidates without publishing
 
-The **Build and validate release candidates** workflow runs automatically for container/build-configuration changes on `docs/user-guide`. It can also be run manually after its workflow file is present on the repository's default branch. Leave **publish** unchecked.
+The **Build and validate release candidates** workflow runs automatically for container/build-configuration changes on `docs/user-guide`. It can also be run manually after its workflow file is present on the repository's default branch. Leave **publish_anaconda** and **publish_quay** unchecked.
 
 It builds/tests the Conda package, runs regression tests and the public demo in Docker, converts that same image to an Apptainer SIF, and runs the demo again in Apptainer. Both container runs use the same result validator as the source route. Packages, the Docker archive, the SIF, checksums, and reviewer logs are retained as workflow artifacts for seven days. Build-only runs need no registry credentials.
 
@@ -77,11 +77,41 @@ The ordinary test workflow separately exercises the source install, unit tests, 
 
 1. Review the tests and merge the approved changes into the production branch.
 2. Create the matching version tag (for version 1.0.0, `v1.0.0`).
-3. In **Actions → Build and validate release candidates → Run workflow**, select that tag and check **publish**.
+3. In **Actions → Build and validate release candidates → Run workflow**, select that tag and check **publish_anaconda**, **publish_quay**, or both.
 4. The workflow rebuilds and validates the artifacts. The publication job runs only after both Conda and container checks succeed and any configured `release` environment approval is granted.
 5. It verifies checksums and the Docker source/version labels, then uploads the Conda package and pushes the tested versioned image to Quay.
 6. Verify clean installations from both registries before announcing availability. Enable the corresponding Read the Docs version; create a GitHub release and use Zenodo integration separately when ready.
 
-The release guard rejects publication from a branch, a mismatched tag, or a different repository. Ordinary pushes and build-only runs do not publish, create tags, merge code, or create GitHub releases. No `latest` image tag is changed. If one registry upload fails after the other succeeds, inspect the existing artifact before retrying; the workflow does not force-overwrite Conda packages.
+The release guard rejects publication from a branch, a mismatched tag, or a different repository. Ordinary pushes and build-only runs do not publish, create tags, merge code, or create GitHub releases. No `latest` image tag is changed. Anaconda and Quay use independent publishing jobs. Use **Re-run failed jobs** to retry the failed upload using the original tested artifacts while they remain available (seven days), without rebuilding or repeating the successful registry upload. Do not use **Re-run all jobs** for an upload retry. If an upload completed before its job failed, inspect the registry before retrying; the workflow does not force-overwrite Conda packages.
 
 The local Conda recipe uses the checkout. The release recipe uses the matching version tag and cannot be used until that tag exists.
+
+## Shared controls with MetaPathways
+
+Both repositories use manual `publish_anaconda` and `publish_quay` selections,
+defaulting to false. Neither ordinary pushes nor selecting a version tag alone
+publishes packages. The credentials have identical names: `ANACONDA_API_TOKEN`,
+`QUAY_USERNAME`, and `QUAY_PASSWORD`. Store them in the `release` environment
+or repository Actions secrets. No persistent `PUBLISH_*` variables are needed.
+
+Optional `ANACONDA_OWNER` and `QUAY_REPOSITORY` variables only change the
+destination. Defaults are `hallamlab` and `quay.io/hallamlab/scarab`.
+MetaPathways additionally supports explicit GitHub release publication and
+recovery of older tagged artifacts; SCARAB does not create GitHub releases or
+Zenodo records through this workflow.
+
+## Manual Zenodo archiving
+
+Keep the SCARAB and MetaPathways switches **off** in
+[Zenodo's GitHub settings](https://zenodo.org/account/settings/github/).
+This account-side setting prevents automatic deposits on GitHub release
+publication; GitHub workflow checkboxes cannot disable an existing integration.
+Neither project's release workflow calls the Zenodo API or requires a Zenodo
+secret.
+
+For an approved release, manually upload the tested source archive through
+Zenodo's dashboard. If the software already has a record, use **New version**
+to retain its concept DOI. Review creators, affiliations, version, license,
+and the exact GitHub tag link before publishing the draft. Do not infer authors
+or affiliations from commit contributors. Correct existing creator metadata
+with **Edit**, without making a new software version solely for that correction.

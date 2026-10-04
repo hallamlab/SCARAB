@@ -2,8 +2,12 @@ name: Build and validate release candidates
 on:
   workflow_dispatch:
     inputs:
-      publish:
-        description: 'Publish tested artifacts to Anaconda and Quay (requires a matching version tag)'
+      publish_anaconda:
+        description: 'Publish validated Conda package to Anaconda.org'
+        type: boolean
+        default: false
+      publish_quay:
+        description: 'Publish validated container to Quay'
         type: boolean
         default: false
   push:
@@ -36,7 +40,7 @@ jobs:
       - name: Validate source and publication request
         id: version
         env:
-          PUBLISH_REQUESTED: ${{ inputs.publish || false }}
+          PUBLISH_REQUESTED: ${{ inputs.publish_anaconda || inputs.publish_quay || false }}
         run: python3 scripts/check_release.py
   conda:
     needs: validate
@@ -126,56 +130,60 @@ jobs:
             ${{ runner.temp }}/scarab-reviewer/demo/SCARAB_out*/scarab_*.json
           if-no-files-found: ignore
           retention-days: 7
-  publish:
-    needs: [validate, conda, container]
-    if: github.event_name == 'workflow_dispatch' && inputs.publish
+  anaconda:
+    needs: [validate, conda]
+    if: github.event_name == 'workflow_dispatch' && inputs.publish_anaconda
     environment: release
     runs-on: ubuntu-latest
     env:
       VERSION: ${{ needs.validate.outputs.version }}
       ANACONDA_OWNER: ${{ vars.ANACONDA_OWNER || 'hallamlab' }}
-      QUAY_REPOSITORY: ${{ vars.QUAY_REPOSITORY || 'quay.io/hallamlab/scarab' }}
     steps:
       - uses: actions/download-artifact@v4
         with:
           name: conda-packages
           path: packages
-      - uses: actions/download-artifact@v4
-        with:
-          name: container-archive
-          path: containers
-      - name: Verify artifacts
-        run: |
-          (cd packages && sha256sum --check SHA256SUMS)
-          (cd containers && sha256sum --check SHA256SUMS)
-          docker load -i containers/scarab-candidate.tar.gz
-          test "$(docker inspect --format '{{index .Config.Labels "org.opencontainers.image.revision"}}' scarab:candidate)" = "$GITHUB_SHA"
-          test "$(docker inspect --format '{{index .Config.Labels "org.opencontainers.image.version"}}' scarab:candidate)" = "$VERSION"
+      - name: Verify package checksums
+        run: cd packages && sha256sum --check SHA256SUMS
       - uses: mamba-org/setup-micromamba@v2
         with:
           environment-name: upload-tools
           create-args: >-
             python=3.11 anaconda-client
             -c conda-forge
-      - name: Check publisher credentials
-        env:
-          BINSTAR_API_TOKEN: ${{ secrets.ANACONDA_API_TOKEN }}
-          QUAY_USERNAME: ${{ secrets.QUAY_USERNAME }}
-          QUAY_PASSWORD: ${{ secrets.QUAY_PASSWORD }}
-        run: |
-          test -n "$BINSTAR_API_TOKEN" || { echo 'Missing ANACONDA_API_TOKEN'; exit 1; }
-          test -n "$QUAY_USERNAME" || { echo 'Missing QUAY_USERNAME'; exit 1; }
-          test -n "$QUAY_PASSWORD" || { echo 'Missing QUAY_PASSWORD'; exit 1; }
       - name: Publish Conda package
         shell: bash -el {0}
         env:
           BINSTAR_API_TOKEN: ${{ secrets.ANACONDA_API_TOKEN }}
-        run: anaconda upload --user "$ANACONDA_OWNER" --label main packages/scarab-"$VERSION"-*.conda
+        run: |
+          test -n "$BINSTAR_API_TOKEN" || { echo 'Missing ANACONDA_API_TOKEN'; exit 1; }
+          anaconda upload --user "$ANACONDA_OWNER" --label main packages/scarab-"$VERSION"-*.conda
+  quay:
+    needs: [validate, container]
+    if: github.event_name == 'workflow_dispatch' && inputs.publish_quay
+    environment: release
+    runs-on: ubuntu-latest
+    env:
+      VERSION: ${{ needs.validate.outputs.version }}
+      QUAY_REPOSITORY: ${{ vars.QUAY_REPOSITORY || 'quay.io/hallamlab/scarab' }}
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: container-archive
+          path: containers
+      - name: Verify and load tested image
+        run: |
+          (cd containers && sha256sum --check SHA256SUMS)
+          docker load -i containers/scarab-candidate.tar.gz
+          test "$(docker inspect --format '{{index .Config.Labels "org.opencontainers.image.revision"}}' scarab:candidate)" = "$GITHUB_SHA"
+          test "$(docker inspect --format '{{index .Config.Labels "org.opencontainers.image.version"}}' scarab:candidate)" = "$VERSION"
       - name: Publish validated Docker image
         env:
           QUAY_USERNAME: ${{ secrets.QUAY_USERNAME }}
           QUAY_PASSWORD: ${{ secrets.QUAY_PASSWORD }}
         run: |
+          test -n "$QUAY_USERNAME" || { echo 'Missing QUAY_USERNAME'; exit 1; }
+          test -n "$QUAY_PASSWORD" || { echo 'Missing QUAY_PASSWORD'; exit 1; }
           export DOCKER_CONFIG="$RUNNER_TEMP/scarab-docker-auth"
           mkdir -p "$DOCKER_CONFIG"
           trap 'rm -rf "$DOCKER_CONFIG"' EXIT

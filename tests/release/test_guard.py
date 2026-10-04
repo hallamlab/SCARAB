@@ -8,6 +8,10 @@ spec.loader.exec_module(module)
 
 
 class ReleaseGuardTests(unittest.TestCase):
+    def test_tag_push_cannot_publish(self):
+        with self.assertRaisesRegex(ValueError, 'manual'):
+            module.validate('1.0.0', True, 'tag', 'v1.0.0', 'hallamlab/SCARAB', event='push')
+
     def test_branch_can_build_without_publication(self):
         self.assertEqual(module.validate('1.0.0'), '1.0.0')
 

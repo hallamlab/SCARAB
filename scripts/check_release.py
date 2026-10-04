@@ -5,10 +5,12 @@ from pathlib import Path
 import re
 
 
-def validate(version, publish=False, ref_type='', ref_name='', repository=''):
+def validate(version, publish=False, ref_type='', ref_name='', repository='', event='workflow_dispatch'):
     if not re.fullmatch(r'\d+\.\d+\.\d+', version):
         raise ValueError('Expected a three-part release version')
     if publish:
+        if event != 'workflow_dispatch':
+            raise ValueError('Publication requires a manual workflow dispatch')
         if repository.lower() != 'hallamlab/scarab':
             raise ValueError('Publication is restricted to hallamlab/SCARAB')
         if ref_type != 'tag' or ref_name != 'v' + version:
@@ -25,7 +27,7 @@ if __name__ == '__main__':
     if requested not in ('true', 'false'):
         raise SystemExit('PUBLISH_REQUESTED must be true or false')
     version = validate(match[1], requested == 'true', os.environ.get('GITHUB_REF_TYPE', ''),
-                       os.environ.get('GITHUB_REF_NAME', ''), os.environ.get('GITHUB_REPOSITORY', ''))
+                       os.environ.get('GITHUB_REF_NAME', ''), os.environ.get('GITHUB_REPOSITORY', ''), os.environ.get('GITHUB_EVENT_NAME', ''))
     if os.environ.get('GITHUB_OUTPUT'):
         with open(os.environ['GITHUB_OUTPUT'], 'a') as handle:
             handle.write(f'version={version}\n')
