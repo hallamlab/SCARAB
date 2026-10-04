@@ -24,13 +24,14 @@ jobs:
           python tests/reassembly_smoke.py
           scarab info
           scarab recruit --help
-      - name: Run the public reviewer demo
+      - name: Run the bundled recruitment and reassembly demo
         shell: bash -el {0}
         run: |
           python scripts/prepare_reviewer.py --output "$RUNNER_TEMP/scarab-reviewer"
           cd "$RUNNER_TEMP/scarab-reviewer/demo"
           scarab recruit -m k12.gold_assembly.fasta -l read_list.txt -s SAG -o SCARAB_out -t 2
-          python "$GITHUB_WORKSPACE/scripts/validate_reviewer.py" --dataset . --output SCARAB_out
+          scarab reassemble -i SCARAB_out/algo_defaults/Default/xpgs/ecoli-COLI-K12.3578.intersect.xPG.fasta -l read_list.txt -o reassembly -t 2 --memory 4
+          python "$GITHUB_WORKSPACE/scripts/validate_reviewer.py" --dataset . --output SCARAB_out --reassembly reassembly
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -38,6 +39,10 @@ jobs:
           path: |
             ${{ runner.temp }}/scarab-reviewer/demo/SCARAB_out/SCARAB_log.txt
             ${{ runner.temp }}/scarab-reviewer/demo/SCARAB_out/scarab_*.json
+            ${{ runner.temp }}/scarab-reviewer/demo/reassembly/scarab_*.json
+            ${{ runner.temp }}/scarab-reviewer/demo/reassembly/reassembly_summary.tsv
+            ${{ runner.temp }}/scarab-reviewer/demo/reassembly/*/reassembly.json
+            ${{ runner.temp }}/scarab-reviewer/demo/reassembly/*/logs/**
   docs:
     runs-on: ubuntu-latest
     steps:

@@ -1,0 +1,37 @@
+{
+  "source": "https://drive.google.com/file/d/1yUoPpoNRl6-CZHkRoUYDbikBJk4yC-3V/view",
+  "archive_sha256": "1339ebbce24aef8633e4163174337d53b6e202d22e1e1bd5eb74abc300027175",
+  "description": "Technical demonstration only: first 64 assembly contigs >=2 kb; first 150 kb of the first .3578 trusted scaffold; every fourth primary pair mapping both mates to the subset, in source order. Reads and qualities unchanged. Not an accuracy benchmark.",
+  "minimap2_version": "2.26-r1175",
+  "assembly_contigs": 64,
+  "assembly_bases": 403315,
+  "trusted_bases": 150000,
+  "libraries": {
+    "A": {
+      "source_pairs": 124581,
+      "mapped_pairs": 12083,
+      "retained_pairs": 3021
+    },
+    "B": {
+      "source_pairs": 124538,
+      "mapped_pairs": 12024,
+      "retained_pairs": 3006
+    },
+    "C": {
+      "source_pairs": 124734,
+      "mapped_pairs": 12151,
+      "retained_pairs": 3038
+    }
+  },
+  "files": {
+    "SAG/ecoli-COLI-K12.3578.fasta": "6cd6e747c32f3a12811d7080f979764e916f73a4f6a67be4b8848893a857a3bd",
+    "fastq/k12_A_R1.fastq.gz": "79cd65d6afe6fc1374fb014876302920a574cd922c7cb66dc81317be73262df4",
+    "fastq/k12_A_R2.fastq.gz": "c6ddbf63c6d9b4f6412937aad5046fedba36c0893714b7a53c9df322677fa49d",
+    "fastq/k12_B_R1.fastq.gz": "f71597c80191da86f61a6f81535dfb32c54c3e47ef6f0abef35d19861302a5b2",
+    "fastq/k12_B_R2.fastq.gz": "d201b412a6b2bded307700adb646ad83fab748cd0424d62aced0cb940eaa4583",
+    "fastq/k12_C_R1.fastq.gz": "b76c0c0f9e4ba888f092d03b7c0bbd842430284ce74370f804aed91bcc58723e",
+    "fastq/k12_C_R2.fastq.gz": "5e0a694e54f20f00a624c48ad4df0ff4e82c6fd86597609003f8ea62ff62fd82",
+    "k12.gold_assembly.fasta": "55e4edce64a219418544c9c2d207669afe21838d6f2482d8e9eb6375eabd4122",
+    "read_list.txt": "c0e31ea126fdc14c23bb91398ac213553bd270433a9086b496e64f2190fdc965"
+  }
+}

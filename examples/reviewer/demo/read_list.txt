@@ -1,0 +1,3 @@
+fastq/k12_A_R1.fastq.gz	fastq/k12_A_R2.fastq.gz
+fastq/k12_B_R1.fastq.gz	fastq/k12_B_R2.fastq.gz
+fastq/k12_C_R1.fastq.gz	fastq/k12_C_R2.fastq.gz

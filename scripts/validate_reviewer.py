@@ -27,8 +27,8 @@ def table(path):
         return list(csv.DictReader(handle, delimiter='\t'))
 
 
-def validate(dataset, output):
-    provenance = json.loads((Path(__file__).parent.parent/'tests/reviewer/demo.json').read_text())
+def validate(dataset, output, reassembly):
+    provenance = json.loads((Path(__file__).parent.parent/'tests/reviewer/bundled.json').read_text())
     for name, checksum in provenance['files'].items():
         assert hashlib.sha256((dataset/name).read_bytes()).hexdigest() == checksum, f'Demo input changed: {name}'
     assert json.loads((output/'scarab_status.json').read_text())['state'] == 'complete', 'Run is incomplete'
@@ -69,12 +69,24 @@ def validate(dataset, output):
                 assert set(xpg) <= set(allowed), 'Unknown sequence in xPG'
                 assert all(sequence == allowed[name] for name, sequence in xpg.items()), 'xPG sequence changed'
                 n_products += 1
-    print(f'All reviewer checks passed: 3 paired-read libraries, 2 trusted genomes, {n_products} FASTA products.')
+    assert json.loads((reassembly/'scarab_status.json').read_text())['state'] == 'complete', 'Reassembly incomplete'
+    summaries = table(reassembly/'reassembly_summary.tsv')
+    assert len(summaries) == 1, 'Expected one guided assembly target'
+    receipts = list(reassembly.glob('*/reassembly.json'))
+    assert len(receipts) == 1, 'Missing reassembly receipt'
+    receipt = json.loads(receipts[0].read_text())
+    assert receipt['state'] == 'complete', 'Guided assembly must run, not skip for lack of reads'
+    assert len(receipt['libraries']) == 3 and all(x['clean_pairs'] > 0 for x in receipt['libraries']), 'Each library must contribute usable pairs'
+    fasta(receipts[0].parent/'contigs.fasta')
+    fasta(receipts[0].parent/'scaffolds.fasta')
+    assert not (receipts[0].parent/'work').exists(), 'Successful default reassembly should remove intermediates'
+    print(f'All reviewer checks passed: 3 paired-read libraries, {len(expected_trusted)} trusted genome, {n_products} recruitment FASTA products, and completed guided assembly.')
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--dataset', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--reassembly', type=Path, required=True)
     args = parser.parse_args()
-    validate(args.dataset, args.output)
+    validate(args.dataset, args.output, args.reassembly)

@@ -1,75 +1,95 @@
-# Reviewer/demo test
+# Tiny installation and workflow demo
 
-Use the historical public E. coli K12 demo: one assembly, **three paired-read libraries**, and **two trusted genomes**. The 56 MiB archive is downloaded separately; the repository includes preparation, checksum, and result-validation tools. This is an installation and workflow test, not an independent biological accuracy benchmark.
+SCARAB includes **one bundled demo** that exercises recruitment through guided reassembly. Its inputs total about **1.7 MiB**: a 403 kb assembly, one 150 kb trusted-reference fragment, and three paired-read libraries of roughly 3,000 pairs each. It is deliberately a technical demonstration, not a biological accuracy benchmark.
 
-## Prepare the data
+## Get the bundled inputs
 
-Use your existing SCARAB checkout for the helper scripts. If you installed only the package or container, obtain the scripts first:
+Use your SCARAB checkout. If you installed only the Mamba package or container, obtain the example from GitHub:
 
 ```bash
-git clone https://github.com/hallamlab/SCARAB.git SCARAB-reviewer
-cd SCARAB-reviewer
+git clone https://github.com/hallamlab/SCARAB.git
+cd SCARAB
 ```
 
-From that checkout:
+Then:
 
 ```bash
-python scripts/prepare_reviewer.py --output ~/scarab-reviewer
-cd ~/scarab-reviewer/demo
+cd examples/reviewer/demo
 ```
 
-The helper downloads [demo.zip](https://drive.google.com/file/d/1yUoPpoNRl6-CZHkRoUYDbikBJk4yC-3V/view?usp=sharing), verifies its SHA-256, and extracts it. It refuses to overwrite an existing demo directory. If you already downloaded the archive, add `--archive /path/to/demo.zip` to the preparation command.
+No separate archive download or path editing is required. `read_list.txt` contains relative paths, so run the commands from this directory.
 
-The included `read_list.txt` uses relative paths to `fastq/`; run from the `demo` directory. No path editing is needed. Archive and per-file checksums are recorded in `tests/reviewer/demo.json`.
+## Mamba package or source installation
 
-## Mamba package or GitHub installation
-
-With the SCARAB environment activated:
+Activate your SCARAB environment, then run:
 
 ```bash
-scarab info
 scarab recruit \
   -m k12.gold_assembly.fasta -l read_list.txt \
   -s SAG -o SCARAB_out -t 4
+
+scarab reassemble \
+  -i SCARAB_out/algo_defaults/Default/xpgs/ecoli-COLI-K12.3578.intersect.xPG.fasta \
+  -l read_list.txt -o reassembly -t 4 --memory 4
+
+python ../../../scripts/validate_reviewer.py \
+  --dataset . --output SCARAB_out --reassembly reassembly
 ```
 
-The default command runs MinHash recruitment, maps all three paired libraries, builds abundance/composition features, clusters contigs, and builds anchored xPGs. Allow 8 GB RAM and 2 GB free disk as an initial provision for this demo; these are recommendations, not limits for arbitrary datasets. BBTools uses a bounded 4 GB Java heap by default.
+The xPG path is the default combined recruitment product for the bundled reference. Recruitment and guided reassembly use the same environment. Allow 8 GB RAM for the demo; `--memory 4` controls SPAdes' memory limit, while BBTools has its own bounded heap. See [installation](installation.md) for environment setup and [guided reassembly](reassembly.md) for the individual stages.
 
 ## Docker
 
-After building or installing the image, run from the same demo directory. For a local build, replace the image with `scarab:local`:
+Run from the same demo directory. Use the released image below, or `scarab:local` for a local build:
 
 ```bash
 docker run --rm -u "$(id -u):$(id -g)" \
   -v "$PWD:$PWD" -w "$PWD" quay.io/hallamlab/scarab:1.0.0 \
-  scarab recruit -m k12.gold_assembly.fasta -l read_list.txt \
-  -s SAG -o SCARAB_out_docker -t 4
+  scarab recruit -m k12.gold_assembly.fasta -l read_list.txt -s SAG -o SCARAB_out -t 4
+
+docker run --rm -u "$(id -u):$(id -g)" \
+  -v "$PWD:$PWD" -w "$PWD" quay.io/hallamlab/scarab:1.0.0 \
+  scarab reassemble \
+  -i SCARAB_out/algo_defaults/Default/xpgs/ecoli-COLI-K12.3578.intersect.xPG.fasta \
+  -l read_list.txt -o reassembly -t 4 --memory 4
+
+python3 ../../../scripts/validate_reviewer.py --dataset . --output SCARAB_out --reassembly reassembly
 ```
 
-The registry image becomes available after release publication. See [installation](installation.md) for the local build route.
+The registry image becomes available after release publication. The [installation guide](installation.md) includes local builds.
 
 ## Apptainer
 
+Place `scarab.sif` in this working directory or replace its path:
+
 ```bash
 apptainer exec --bind "$PWD:$PWD" --pwd "$PWD" scarab.sif \
-  scarab recruit -m k12.gold_assembly.fasta -l read_list.txt \
-  -s SAG -o SCARAB_out_apptainer -t 4
+  scarab recruit -m k12.gold_assembly.fasta -l read_list.txt -s SAG -o SCARAB_out -t 4
+
+apptainer exec --bind "$PWD:$PWD" --pwd "$PWD" scarab.sif \
+  scarab reassemble \
+  -i SCARAB_out/algo_defaults/Default/xpgs/ecoli-COLI-K12.3578.intersect.xPG.fasta \
+  -l read_list.txt -o reassembly -t 4 --memory 4
+
+python3 ../../../scripts/validate_reviewer.py --dataset . --output SCARAB_out --reassembly reassembly
 ```
 
-All routes use the same CLI and inputs. Additional input locations require additional mounts. Use separate output directories when comparing installations.
+These are three installation routes for the same demo. Use a fresh copy of the inputs when comparing installations; completed matching runs otherwise reuse their outputs. `scripts/prepare_reviewer.py --output /new/workspace` copies only the verified bundled inputs to `/new/workspace/demo` without downloading anything or copying previous results.
 
-## Validate the results
+## What success means
 
-From your SCARAB checkout, point the validator at the dataset and the output directory you used:
+The validator prints **`All reviewer checks passed`** only after checking:
 
-```bash
-python scripts/validate_reviewer.py \
-  --dataset ~/scarab-reviewer/demo \
-  --output ~/scarab-reviewer/demo/SCARAB_out
-```
+- Bundled input checksums and successful run status.
+- Coverage from all three libraries and agreement between coverage and subcontig IDs.
+- De novo, HDBSCAN, OC-SVM and combined assignment tables against their FASTA membership; noise must not be exported as a bin.
+- Recruited sequences against the assembly and xPG sequences against their trusted/recruited sources.
+- A completed guided assembly, usable read pairs from every library, nonempty contigs/scaffolds, and normal intermediate cleanup. A target skipped for lack of reads does not pass.
 
-Success prints **`All reviewer checks passed`**. Validation checks the original input hashes, successful run status, coverage for all three libraries, matching subcontig/coverage identifiers, and anchored products for both trusted genomes. It verifies that assignment tables agree with FASTA membership, recruited sequences match the assembly, and xPG sequences come from the trusted genome or recruits. Noise labels must not become exported bins.
+Inspect `SCARAB_out/SCARAB_log.txt`, the recruited FASTAs, and `reassembly/reassembly_summary.tsv`. Each assembly target also retains commands, an assembly log and its result receipt. See [outputs](outputs.md) and [reassembly](reassembly.md).
 
-The validator does not impose an exact number of clusters: numerical behavior can vary across platforms. Read `SCARAB_log.txt` and the [output guide](outputs.md) to interpret the results. Passing these checks establishes data consistency and successful execution, not a claim that every inferred bin is biologically correct.
+The fixture checks technical execution and data consistency. Its selected reads and shortened reference are unsuitable for measuring recruitment accuracy or biological genome quality.
 
-To exercise the optional unanchored route, run the same command without `-s SAG` and use a new output directory. That route produces de novo products; the anchored-demo validator deliberately requires trusted-genome outputs.
+## Provenance
+
+The fixture derives from the [original public E. coli K12 SCARAB demo](https://drive.google.com/file/d/1yUoPpoNRl6-CZHkRoUYDbikBJk4yC-3V/view). `tests/reviewer/demo.json` preserves the original archive provenance; `tests/reviewer/bundled.json` records the selection procedure, tool version, retained read counts and input hashes. `examples/reviewer/README.md` and `scripts/build_reviewer_subset.py` document reproduction. The original 55.7 MiB archive is a source artifact, not a second reviewer test.

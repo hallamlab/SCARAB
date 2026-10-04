@@ -33,3 +33,9 @@ dev_utils/genome_qc/config.yaml
 # Public documentation builds (never stage local manuscript material)
 /_build/
 /docs/_build/
+
+# Reviewer-generated results (bundled inputs remain tracked)
+/examples/reviewer/demo/SCARAB_out*/
+/examples/reviewer/demo/reassembly*/
+
+/examples/reviewer/demo/.*.scarab.lock
