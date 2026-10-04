@@ -29,7 +29,7 @@ python ../../../scripts/validate_reviewer.py --dataset . --output SCARAB_out --r
 
 ## Workflow
 
-[![SCARAB workflow](docs/assets/workflow-brief.svg)](https://hallamlab-scarab.readthedocs.io/)
+[![SCARAB workflow](docs/assets/workflow-brief.svg?v=48983eb19b99)](https://hallamlab-scarab.readthedocs.io/)
 
 For input preparation, parameters, outputs, guided reassembly, and HPC execution, see the **[user guide](https://hallamlab-scarab.readthedocs.io/)**.
 
