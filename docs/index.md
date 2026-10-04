@@ -2,7 +2,7 @@
 
 **SCARAB 1.0.0:** install with [Mamba, Docker or Apptainer](installation.md), then run the [bundled recruitment-and-reassembly demo](reviewer-test.md).
 
-SCARAB uses an ensemble of machine-learning methods to recruit metagenomic contigs around trusted genomic scaffolds, such as single-cell amplified genomes (SAGs). It combines sequence similarity, read-derived abundance and nucleotide composition to recover sequence associated with a target population and construct extended partial genomes (xPGs).
+SCARAB uses an ensemble of machine-learning methods to recruit metagenomic contigs around trusted genomic scaffolds, such as single-cell amplified genomes (SAGs). It combines sequence similarity, read-derived abundance and nucleotide composition to recover sequence associated with a target population and construct extended population-genomes (xPGs).
 
 MinHash searches identify candidate contigs and high-similarity anchors. Coverage and tetranucleotide-composition features are transformed, scaled and embedded with Uniform Manifold Approximation and Projection (UMAP). Density-based clustering (HDBSCAN) identifies groups of related sequence windows, while a one-class support vector machine (OC-SVM) learns the feature distribution of anchor-associated windows. Combined recruitment retains contigs supported by at least two of the MinHash, HDBSCAN and OC-SVM evidence sets, together with qualifying anchors. HDBSCAN also provides de novo bins when trusted anchors are unavailable.
 

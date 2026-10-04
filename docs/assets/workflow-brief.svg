@@ -127,8 +127,9 @@
 <text x="1193.3333333333335" y="1105.0" font-size="22" text-anchor="middle">sequence and deduplicate</text>
 <text x="1193.3333333333335" y="1167.0" font-size="18" text-anchor="middle">BBTools dedupe</text>
 <circle cx="1560.0" cy="1130.0" r="12" fill="#D5E8D4" stroke="#82B366" stroke-width="3"/>
-<text x="1560.0" y="1080.0" font-size="22" text-anchor="middle">Recruitment tables, bins</text>
-<text x="1560.0" y="1105.0" font-size="22" text-anchor="middle">and extended genomes</text>
+<text x="1560.0" y="1055.0" font-size="22" text-anchor="middle">Recruitment tables, bins and</text>
+<text x="1560.0" y="1080.0" font-size="22" text-anchor="middle">extended population-genomes</text>
+<text x="1560.0" y="1105.0" font-size="22" text-anchor="middle">(xPGs)</text>
 <path d="M473.0 1130.0 L813.6666666666667 1130.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
 <path d="M839.6666666666667 1130.0 L1180.3333333333335 1130.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
 <path d="M1206.3333333333335 1130.0 L1547.0 1130.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
@@ -138,7 +139,7 @@
 <text x="326" y="1327.0" font-size="20" text-anchor="middle">6</text>
 <path d="M339 1320.0 L448 1320.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
 <circle cx="460.0" cy="1320.0" r="12" fill="#DAE8FC" stroke="#6C8EBF" stroke-width="3"/>
-<text x="460.0" y="1270.0" font-size="22" text-anchor="middle">Extended genomes +</text>
+<text x="460.0" y="1270.0" font-size="22" text-anchor="middle">xPGs +</text>
 <text x="460.0" y="1295.0" font-size="22" text-anchor="middle">paired short reads</text>
 <path d="M813.6666666666667 1320.0 L826.6666666666667 1307.0 L839.6666666666667 1320.0 L826.6666666666667 1333.0 Z" fill="#f5f5f5" stroke="#666666" stroke-width="3"/>
 <text x="826.6666666666667" y="1270.0" font-size="22" text-anchor="middle">Map and select pairs;</text>

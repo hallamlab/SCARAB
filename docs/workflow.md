@@ -35,7 +35,7 @@ Trusted inputs can be SAGs or another curated genome representation. They
 provide anchors for a target population; their presence does not establish
 that every recruited contig belongs to the same biological strain.
 
-`scarab recruit` returns contig sets and extended partial genomes (xPGs).
+`scarab recruit` returns contig sets and extended population-genomes (xPGs).
 `scarab reassemble` is a separate, optional step that recruits paired short
 reads to those sequences and builds guided assemblies. Neither step assigns
 formal genome-quality categories. Evaluate completeness, contamination,

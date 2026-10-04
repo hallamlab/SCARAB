@@ -130,7 +130,7 @@
           "kind": "compute"
         },
         {
-          "label": "Recruitment tables, bins\nand extended genomes",
+          "label": "Recruitment tables, bins and\nextended population-genomes\n(xPGs)",
           "tool": "",
           "kind": "output"
         }
@@ -141,7 +141,7 @@
       "title": "Guided reassembly",
       "nodes": [
         {
-          "label": "Extended genomes +\npaired short reads",
+          "label": "xPGs +\npaired short reads",
           "tool": "",
           "kind": "input"
         },

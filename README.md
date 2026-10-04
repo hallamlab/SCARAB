@@ -1,6 +1,6 @@
 # SCARAB: SCaffold-Anchored Recruitment And Binning
 
-SCARAB recruits and bins metagenomic contigs using sequence composition, read abundance, and optional trusted genomes such as SAGs. It produces extended partial genomes (xPGs) and supports optional guided reassembly in the same environment.
+SCARAB recruits and bins metagenomic contigs using sequence composition, read abundance, and optional trusted genomes such as SAGs. It produces extended population-genomes (xPGs) and supports optional guided reassembly in the same environment.
 
 **[Full user guide](https://hallamlab-scarab.readthedocs.io/en/latest/index.html)** · [Reviewer test](https://hallamlab-scarab.readthedocs.io/en/latest/reviewer-test.html) · [Issues and feature requests](https://github.com/hallamlab/SCARAB/issues)
 
@@ -30,7 +30,7 @@ python ../../../scripts/validate_reviewer.py --dataset . --output SCARAB_out --r
 
 ## Workflow
 
-[![SCARAB workflow](docs/assets/workflow-brief.svg?v=48983eb19b99)](https://hallamlab-scarab.readthedocs.io/)
+[![SCARAB workflow](docs/assets/workflow-brief.svg?v=1a5a049061b1)](https://hallamlab-scarab.readthedocs.io/)
 
 For input preparation, parameters, outputs, guided reassembly, and HPC execution, see the **[user guide](https://hallamlab-scarab.readthedocs.io/)**.
 

@@ -46,7 +46,7 @@ about:
   home: https://github.com/hallamlab/SCARAB
   license: GPL-3.0-only
   license_file: LICENSE
-  summary: Genome-guided recruitment of metagenomic contigs and extended partial genomes.
+  summary: Genome-guided recruitment of metagenomic contigs and extended population-genomes.
 extra:
   recipe-maintainers:
     - RyloByte

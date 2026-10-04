@@ -285,7 +285,7 @@
           "kind": "compute"
         },
         {
-          "label": "Bin FASTAs +\nextended partial genomes",
+          "label": "Bin FASTAs + extended\npopulation-genomes (xPGs)",
           "tool": "",
           "kind": "output"
         }
