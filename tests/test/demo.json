@@ -1,7 +1,7 @@
 {
   "source": "https://drive.google.com/file/d/1yUoPpoNRl6-CZHkRoUYDbikBJk4yC-3V/view",
   "archive_sha256": "1339ebbce24aef8633e4163174337d53b6e202d22e1e1bd5eb74abc300027175",
-  "description": "Historical public SCARAB E. coli K12 demo; three paired libraries and two trusted genomes. Original source archive provenance; the sole user-facing demo is the tiny derived bundle in examples/reviewer/demo.",
+  "description": "Historical public SCARAB E. coli K12 demo; three paired libraries and two trusted genomes. Original source archive provenance; the sole user-facing demo is the tiny derived bundle in examples/test/demo.",
   "files": {
     "SAG/ecoli-COLI-K12.3578.fasta": "011b9d401ecf1a5beccfc7e4c411bb2fe5cba8c33b8a47db29cfa0472cc84e13",
     "SAG/ecoli-COLI-K12.8710.fasta": "3b134e78dd757c55e12e273f1700e80ca9240bfd71790d14e72dcbe7bcf6b9c2",

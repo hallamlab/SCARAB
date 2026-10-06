@@ -21,7 +21,7 @@ python scripts/render_packaging.py --check
 scarab info
 ```
 
-The regression tests exercise input validation, effective parameter overrides, safe reruns, read-name collisions, similarity thresholds, external-tool failure propagation, and unanchored/noise behavior. They are not a replacement for a representative biological reviewer run.
+The regression tests exercise input validation, effective parameter overrides, safe reruns, read-name collisions, similarity thresholds, external-tool failure propagation, and unanchored/noise behavior. They are not a replacement for a representative biological test run.
 
 ## Build a local Conda package
 
@@ -61,7 +61,7 @@ In **hallamlab/SCARAB → Settings → Environments**, create an environment nam
 | `QUAY_USERNAME` | Quay robot username, for example `hallamlab+scarab`. |
 | `QUAY_PASSWORD` | That robot's token. |
 
-Configure a required reviewer on the `release` environment if you want a human approval before publication. Never put tokens in configuration files, issues, or source control.
+Configure a required test on the `release` environment if you want a human approval before publication. Never put tokens in configuration files, issues, or source control.
 
 The workflow defaults to Anaconda owner `hallamlab` and image repository `quay.io/hallamlab/scarab`. Optional GitHub Actions variables `ANACONDA_OWNER` and `QUAY_REPOSITORY` override those destinations; update the public installation instructions if you change them. No Quay source-build trigger is required: GitHub Actions builds, tests, and pushes the image.
 
@@ -69,9 +69,9 @@ The workflow defaults to Anaconda owner `hallamlab` and image repository `quay.i
 
 The **Build and validate release candidates** workflow runs automatically for container/build-configuration changes on `docs/user-guide`. It can also be run manually after its workflow file is present on the repository's default branch. Leave **publish_anaconda** and **publish_quay** unchecked.
 
-It builds/tests the Conda package, installs that package into a fresh Mamba environment and runs the complete recruitment-and-reassembly demo. It also runs regression tests and the same demo in Docker, converts that image to an Apptainer SIF, and runs the demo again in Apptainer. Both container runs use the same result validator as the source route. Packages, the Docker archive, the SIF, checksums, and reviewer logs are retained as workflow artifacts for seven days. Build-only runs need no registry credentials.
+It builds/tests the Conda package, installs that package into a fresh Mamba environment and runs the complete recruitment-and-reassembly demo. It also runs regression tests and the same demo in Docker, converts that image to an Apptainer SIF, and runs the demo again in Apptainer. Both container runs use the same result validator as the source route. Packages, the Docker archive, the SIF, checksums, and test logs are retained as workflow artifacts for seven days. Build-only runs need no registry credentials.
 
-The ordinary test workflow separately exercises the source install, unit tests, public reviewer demo, and documentation. The Python artifact workflow verifies source/wheel contents.
+The ordinary test workflow separately exercises the source install, unit tests, public test demo, and documentation. The Python artifact workflow verifies source/wheel contents.
 
 ## Publish an approved release
 

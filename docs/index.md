@@ -1,6 +1,6 @@
 # SCARAB: SCaffold-Anchored Recruitment And Binning
 
-**SCARAB 1.0.0:** install with [Mamba, Docker or Apptainer](installation.md), then run the [bundled recruitment-and-reassembly demo](reviewer-test.md).
+**SCARAB 1.0.0:** install with [Mamba, Docker or Apptainer](installation.md), then run the [bundled recruitment-and-reassembly demo](test.md).
 
 SCARAB uses an ensemble of machine-learning methods to recruit metagenomic contigs around trusted genomic scaffolds, such as single-cell amplified genomes (SAGs). It combines sequence similarity, read-derived abundance and nucleotide composition to recover sequence associated with a target population and construct extended population-genomes (xPGs).
 
@@ -8,7 +8,7 @@ MinHash searches identify candidate contigs and high-similarity anchors. Coverag
 
 AutoOpt can select clustering settings using Rényi entropy profiles of read abundance and bundled reference calibrations; explicit parameter overrides remain available. The optional guided-reassembly step maps paired reads to an xPG and runs SPAdes with trusted contigs. Recruitment and reassembly produce candidates for downstream genome-quality assessment and biological interpretation. See the [detailed workflow](workflow.md), [parameter guide](parameters.md) and [method citations](citations.md) for the algorithms and their assumptions.
 
-Start with [installation](installation.md) and the [tiny end-to-end reviewer test](reviewer-test.md), then adapt the [input guide](inputs.md) to your own assembly, reads and optional trusted genomes.
+Start with [installation](installation.md) and the [tiny end-to-end test test](test.md), then adapt the [input guide](inputs.md) to your own assembly, reads and optional trusted genomes.
 
 ```{container} primary-workflow
 [![SCARAB workflow](assets/workflow-brief.svg)](assets/workflow-brief.svg)
@@ -24,7 +24,7 @@ Arrows between numbered modules trace the conceptual flow of results. Optional b
 
 installation
 quickstart
-reviewer-test
+test
 inputs
 ```
 

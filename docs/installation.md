@@ -18,7 +18,7 @@ scarab recruit --help
 
 The Conda package declares the Python libraries and external executables, including minimap2, SAMtools, MetaBAT's depth summarizer, BBTools and SPAdes for guided reassembly. No Git-based pip helper installation is required. Use the pinned version above for the published workflow. The [release checklist](development.md) describes package validation and publication.
 
-Then follow the [same demo test](reviewer-test.md) used by all installation routes.
+Then follow the [same demo test](test.md) used by all installation routes.
 
 ## 2. Docker
 
@@ -29,7 +29,7 @@ docker pull quay.io/hallamlab/scarab:1.0.0
 docker run --rm quay.io/hallamlab/scarab:1.0.0 scarab info
 ```
 
-Run the [Docker demo command](reviewer-test.md#docker) with your input directory mounted. Use a version tag or digest when recording a reproducible analysis. The Docker image installs the actual Python package; it does not depend on a source-directory `PYTHONPATH` wrapper.
+Run the [Docker demo command](test.md#docker) with your input directory mounted. Use a version tag or digest when recording a reproducible analysis. The Docker image installs the actual Python package; it does not depend on a source-directory `PYTHONPATH` wrapper.
 
 To build this checkout locally:
 
@@ -49,7 +49,7 @@ apptainer pull scarab.sif docker://quay.io/hallamlab/scarab:1.0.0
 apptainer exec scarab.sif scarab info
 ```
 
-Run the [Apptainer demo command](reviewer-test.md#apptainer). The SIF already contains SCARAB and its dependencies; an additional runtime Mamba environment is unnecessary. Build/pull on a machine with internet, then copy the SIF to an offline HPC filesystem.
+Run the [Apptainer demo command](test.md#apptainer). The SIF already contains SCARAB and its dependencies; an additional runtime Mamba environment is unnecessary. Build/pull on a machine with internet, then copy the SIF to an offline HPC filesystem.
 
 For an unpublished locally built image:
 
@@ -74,7 +74,7 @@ scarab recruit --help
 
 `environment.yml` supplies the pinned scientific Python packages and native tools. Pip installs SCARAB into that active environment. Installing with pip alone does not install external mapping and deduplication programs. `scarab_env.yml` is a generated compatibility copy of the same environment specification, not a different installation route.
 
-Run the [demo test](reviewer-test.md), then proceed to [your own inputs](quickstart.md). Before updating a working checkout/environment, stop any runs that use it. Keep separate output directories for different scientific configurations.
+Run the [demo test](test.md), then proceed to [your own inputs](quickstart.md). Before updating a working checkout/environment, stop any runs that use it. Keep separate output directories for different scientific configurations.
 
 ## Installation verification
 

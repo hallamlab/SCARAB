@@ -9,8 +9,8 @@ import shutil
 
 def prepare(output):
     root = Path(__file__).resolve().parents[1]
-    source = root/'examples/reviewer/demo'
-    manifest = json.loads((root/'tests/reviewer/bundled.json').read_text())
+    source = root/'examples/test/demo'
+    manifest = json.loads((root/'tests/test/bundled.json').read_text())
     output = output.expanduser().resolve()/'demo'
     if output.exists():
         raise ValueError(f'{output} already exists; choose a fresh destination')

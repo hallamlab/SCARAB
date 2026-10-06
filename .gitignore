@@ -34,8 +34,13 @@ dev_utils/genome_qc/config.yaml
 /_build/
 /docs/_build/
 
-# Reviewer-generated results (bundled inputs remain tracked)
+# Test-generated results (bundled inputs remain tracked)
+/examples/test/demo/SCARAB_out*/
+/examples/test/demo/reassembly*/
+
+/examples/test/demo/.*.scarab.lock
+
+# Results created with older test commands
 /examples/reviewer/demo/SCARAB_out*/
 /examples/reviewer/demo/reassembly*/
-
 /examples/reviewer/demo/.*.scarab.lock

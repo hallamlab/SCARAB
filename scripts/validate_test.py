@@ -28,7 +28,7 @@ def table(path):
 
 
 def validate(dataset, output, reassembly):
-    provenance = json.loads((Path(__file__).parent.parent/'tests/reviewer/bundled.json').read_text())
+    provenance = json.loads((Path(__file__).parent.parent/'tests/test/bundled.json').read_text())
     for name, checksum in provenance['files'].items():
         assert hashlib.sha256((dataset/name).read_bytes()).hexdigest() == checksum, f'Demo input changed: {name}'
     assert json.loads((output/'scarab_status.json').read_text())['state'] == 'complete', 'Run is incomplete'
@@ -80,7 +80,7 @@ def validate(dataset, output, reassembly):
     fasta(receipts[0].parent/'contigs.fasta')
     fasta(receipts[0].parent/'scaffolds.fasta')
     assert not (receipts[0].parent/'work').exists(), 'Successful default reassembly should remove intermediates'
-    print(f'All reviewer checks passed: 3 paired-read libraries, {len(expected_trusted)} trusted genome, {n_products} recruitment FASTA products, and completed guided assembly.')
+    print(f'All test checks passed: 3 paired-read libraries, {len(expected_trusted)} trusted genome, {n_products} recruitment FASTA products, and completed guided assembly.')
 
 
 if __name__ == '__main__':

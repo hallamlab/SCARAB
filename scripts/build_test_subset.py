@@ -29,7 +29,7 @@ def write_fasta(path, records):
 
 
 def build(archive, output):
-    original = json.loads((ROOT/'tests/reviewer/demo.json').read_text())
+    original = json.loads((ROOT/'tests/test/demo.json').read_text())
     if hashlib.sha256(archive.read_bytes()).hexdigest() != original['archive_sha256']:
         raise ValueError('Original demo archive checksum mismatch')
     if output.exists(): raise ValueError('Choose a new output directory')
