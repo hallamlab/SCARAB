@@ -31,20 +31,20 @@
 <text x="460.0" y="345.0" font-size="22" text-anchor="middle">trusted scaffolds</text>
 <path d="M813.6666666666667 370.0 L826.6666666666667 357.0 L839.6666666666667 370.0 L826.6666666666667 383.0 Z" fill="#f5f5f5" stroke="#666666" stroke-width="3"/>
 <text x="826.6666666666667" y="345.0" font-size="22" text-anchor="middle">Filter by length</text>
-<text x="826.6666666666667" y="407.0" font-size="18" text-anchor="middle">min_len</text>
+<text x="826.6666666666667" y="407.0" font-size="18" text-anchor="middle">SCARAB</text>
 <path d="M1180.3333333333335 370.0 L1193.3333333333335 357.0 L1206.3333333333335 370.0 L1193.3333333333335 383.0 Z" fill="#f5f5f5" stroke="#666666" stroke-width="3"/>
 <text x="1193.3333333333335" y="320.0" font-size="22" text-anchor="middle">Create overlapping</text>
 <text x="1193.3333333333335" y="345.0" font-size="22" text-anchor="middle">sequence windows</text>
-<text x="1193.3333333333335" y="407.0" font-size="18" text-anchor="middle">build_subcontigs</text>
+<text x="1193.3333333333335" y="407.0" font-size="18" text-anchor="middle">SCARAB</text>
 <circle cx="1560.0" cy="370.0" r="12" fill="#D5E8D4" stroke="#82B366" stroke-width="3"/>
 <text x="1560.0" y="320.0" font-size="22" text-anchor="middle">Assembly windows +</text>
 <text x="1560.0" y="345.0" font-size="22" text-anchor="middle">trusted windows</text>
 <path d="M473.0 370.0 L813.6666666666667 370.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
 <path d="M839.6666666666667 370.0 L1180.3333333333335 370.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
 <path d="M1206.3333333333335 370.0 L1547.0 370.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
-<text x="1010" y="468" font-size="18" text-anchor="middle">Defaults: 10 kb windows; 2 kb overlap; 2 kb minimum length</text>
 <path d="M326 384.0 L326 546.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
-<text x="160" y="560.0" font-size="27" text-anchor="middle">Sequence anchors</text>
+<text x="160" y="545.0" font-size="27" text-anchor="middle">Sequence anchors</text>
+<text x="160" y="575.0" font-size="27" text-anchor="middle">(optional)</text>
 <rect x="313" y="547.0" width="26" height="26" rx="0" fill="#F5F5F5" stroke="#111111" stroke-width="1.5"/>
 <text x="326" y="567.0" font-size="20" text-anchor="middle">2</text>
 <path d="M339 560.0 L448 560.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
@@ -58,11 +58,11 @@
 <path d="M997.0 560.0 L1010.0 547.0 L1023.0 560.0 L1010.0 573.0 Z" fill="#f5f5f5" stroke="#666666" stroke-width="3"/>
 <text x="1010.0" y="510.0" font-size="22" text-anchor="middle">Index assembly +</text>
 <text x="1010.0" y="535.0" font-size="22" text-anchor="middle">search similarities</text>
-<text x="1010.0" y="597.0" font-size="18" text-anchor="middle">SBT; Jaccard / containment</text>
+<text x="1010.0" y="597.0" font-size="18" text-anchor="middle">sourmash</text>
 <path d="M1272.0 560.0 L1285.0 547.0 L1298.0 560.0 L1285.0 573.0 Z" fill="#f5f5f5" stroke="#666666" stroke-width="3"/>
 <text x="1285.0" y="510.0" font-size="22" text-anchor="middle">Select qualifying</text>
 <text x="1285.0" y="535.0" font-size="22" text-anchor="middle">trusted anchors</text>
-<text x="1285.0" y="597.0" font-size="18" text-anchor="middle">minimum similarity</text>
+<text x="1285.0" y="597.0" font-size="18" text-anchor="middle">SCARAB / pandas</text>
 <circle cx="1560.0" cy="560.0" r="12" fill="#D5E8D4" stroke="#82B366" stroke-width="3"/>
 <text x="1560.0" y="510.0" font-size="22" text-anchor="middle">Candidate matches +</text>
 <text x="1560.0" y="535.0" font-size="22" text-anchor="middle">high-similarity anchors</text>
@@ -70,7 +70,6 @@
 <path d="M748.0 560.0 L997.0 560.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
 <path d="M1023.0 560.0 L1272.0 560.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
 <path d="M1298.0 560.0 L1547.0 560.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
-<text x="1010" y="658" font-size="18" text-anchor="middle">Optional: requires trusted references with usable matches</text>
 <path d="M326 574.0 L326 786.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
 <text x="160" y="800.0" font-size="27" text-anchor="middle">Feature engineering</text>
 <rect x="313" y="787.0" width="26" height="26" rx="0" fill="#F5F5F5" stroke="#111111" stroke-width="1.5"/>
@@ -82,11 +81,11 @@
 <text x="460" y="711.0" font-size="22" text-anchor="middle">assembly windows</text>
 <path d="M807 736.0 L820 723.0 L833 736.0 L820 749.0 Z" fill="#f5f5f5" stroke="#666666" stroke-width="3"/>
 <text x="820" y="711.0" font-size="22" text-anchor="middle">Map reads; sort BAM</text>
-<text x="820" y="773.0" font-size="18" text-anchor="middle">minimap2; SAMtools</text>
+<text x="820" y="773.0" font-size="18" text-anchor="middle">minimap2 / SAMtools</text>
 <path d="M1147 736.0 L1160 723.0 L1173 736.0 L1160 749.0 Z" fill="#f5f5f5" stroke="#666666" stroke-width="3"/>
 <text x="1160" y="686.0" font-size="22" text-anchor="middle">Summarize + scale</text>
 <text x="1160" y="711.0" font-size="22" text-anchor="middle">coverage</text>
-<text x="1160" y="773.0" font-size="18" text-anchor="middle">MetaBAT depth; StandardScaler</text>
+<text x="1160" y="773.0" font-size="18" text-anchor="middle">MetaBAT / scikit-learn</text>
 <path d="M473 736.0 L807 736.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
 <path d="M833 736.0 L1147 736.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
 <path d="M1173 736.0 L1370 736.0 L1370 800.0" fill="none" stroke="#111111" stroke-width="1.5"/>
@@ -97,11 +96,11 @@
 <path d="M807 864.0 L820 851.0 L833 864.0 L820 877.0 Z" fill="#f5f5f5" stroke="#666666" stroke-width="3"/>
 <text x="820" y="814.0" font-size="22" text-anchor="middle">Count canonical</text>
 <text x="820" y="839.0" font-size="22" text-anchor="middle">tetranucleotides</text>
-<text x="820" y="901.0" font-size="18" text-anchor="middle">136 features; pseudocount</text>
+<text x="820" y="901.0" font-size="18" text-anchor="middle">SCARAB / NumPy</text>
 <path d="M1147 864.0 L1160 851.0 L1173 864.0 L1160 877.0 Z" fill="#f5f5f5" stroke="#666666" stroke-width="3"/>
 <text x="1160" y="814.0" font-size="22" text-anchor="middle">Transform + scale</text>
 <text x="1160" y="839.0" font-size="22" text-anchor="middle">composition</text>
-<text x="1160" y="901.0" font-size="18" text-anchor="middle">CLR; StandardScaler</text>
+<text x="1160" y="901.0" font-size="18" text-anchor="middle">scikit-bio / scikit-learn</text>
 <path d="M473 864.0 L807 864.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
 <path d="M833 864.0 L1147 864.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
 <path d="M1173 864.0 L1370 864.0 L1370 800.0" fill="none" stroke="#111111" stroke-width="1.5"/>
@@ -109,7 +108,6 @@
 <circle cx="1560" cy="800.0" r="12" fill="#D5E8D4" stroke="#82B366" stroke-width="3"/>
 <text x="1560" y="750.0" font-size="22" text-anchor="middle">Abundance +</text>
 <text x="1560" y="775.0" font-size="22" text-anchor="middle">composition matrices</text>
-<text x="1010" y="948" font-size="18" text-anchor="middle">Reads map to assembly windows; composition is computed from the same windows</text>
 <path d="M326 814.0 L326 1026.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
 <text x="160" y="1040.0" font-size="27" text-anchor="middle">Parameter selection</text>
 <rect x="313" y="1027.0" width="26" height="26" rx="0" fill="#F5F5F5" stroke="#111111" stroke-width="1.5"/>
@@ -121,15 +119,15 @@
 <path d="M722.0 1040.0 L735.0 1027.0 L748.0 1040.0 L735.0 1053.0 Z" fill="#f5f5f5" stroke="#666666" stroke-width="3"/>
 <text x="735.0" y="990.0" font-size="22" text-anchor="middle">Calculate diversity</text>
 <text x="735.0" y="1015.0" font-size="22" text-anchor="middle">profiles</text>
-<text x="735.0" y="1077.0" font-size="18" text-anchor="middle">Rényi entropy</text>
+<text x="735.0" y="1077.0" font-size="18" text-anchor="middle">NumPy</text>
 <path d="M997.0 1040.0 L1010.0 1027.0 L1023.0 1040.0 L1010.0 1053.0 Z" fill="#f5f5f5" stroke="#666666" stroke-width="3"/>
 <text x="1010.0" y="990.0" font-size="22" text-anchor="middle">Resolve AutoOpt</text>
 <text x="1010.0" y="1015.0" font-size="22" text-anchor="middle">method + preset</text>
-<text x="1010.0" y="1077.0" font-size="18" text-anchor="middle">defaults / reference matching</text>
+<text x="1010.0" y="1077.0" font-size="18" text-anchor="middle">SCARAB</text>
 <path d="M1272.0 1040.0 L1285.0 1027.0 L1298.0 1040.0 L1285.0 1053.0 Z" fill="#f5f5f5" stroke="#666666" stroke-width="3"/>
 <text x="1285.0" y="990.0" font-size="22" text-anchor="middle">Apply explicit</text>
 <text x="1285.0" y="1015.0" font-size="22" text-anchor="middle">parameter overrides</text>
-<text x="1285.0" y="1077.0" font-size="18" text-anchor="middle">HDBSCAN; OC-SVM</text>
+<text x="1285.0" y="1077.0" font-size="18" text-anchor="middle">SCARAB</text>
 <circle cx="1560.0" cy="1040.0" r="12" fill="#D5E8D4" stroke="#82B366" stroke-width="3"/>
 <text x="1560.0" y="990.0" font-size="22" text-anchor="middle">Effective clustering</text>
 <text x="1560.0" y="1015.0" font-size="22" text-anchor="middle">parameters</text>
@@ -137,7 +135,6 @@
 <path d="M748.0 1040.0 L997.0 1040.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
 <path d="M1023.0 1040.0 L1272.0 1040.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
 <path d="M1298.0 1040.0 L1547.0 1040.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
-<text x="1010" y="1138" font-size="18" text-anchor="middle">Reference-based selection does not retrain against ground truth for the new sample</text>
 <path d="M326 1054.0 L326 1216.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
 <text x="160" y="1230.0" font-size="27" text-anchor="middle">Feature embedding</text>
 <rect x="313" y="1217.0" width="26" height="26" rx="0" fill="#F5F5F5" stroke="#111111" stroke-width="1.5"/>
@@ -153,14 +150,13 @@
 <path d="M1180.3333333333335 1230.0 L1193.3333333333335 1217.0 L1206.3333333333335 1230.0 L1193.3333333333335 1243.0 Z" fill="#f5f5f5" stroke="#666666" stroke-width="3"/>
 <text x="1193.3333333333335" y="1180.0" font-size="22" text-anchor="middle">Join embeddings</text>
 <text x="1193.3333333333335" y="1205.0" font-size="22" text-anchor="middle">by window ID</text>
-<text x="1193.3333333333335" y="1267.0" font-size="18" text-anchor="middle">shared feature space</text>
+<text x="1193.3333333333335" y="1267.0" font-size="18" text-anchor="middle">pandas</text>
 <circle cx="1560.0" cy="1230.0" r="12" fill="#D5E8D4" stroke="#82B366" stroke-width="3"/>
 <text x="1560.0" y="1180.0" font-size="22" text-anchor="middle">Combined window</text>
 <text x="1560.0" y="1205.0" font-size="22" text-anchor="middle">embedding</text>
 <path d="M473.0 1230.0 L813.6666666666667 1230.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
 <path d="M839.6666666666667 1230.0 L1180.3333333333335 1230.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
 <path d="M1206.3333333333335 1230.0 L1547.0 1230.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
-<text x="1010" y="1328" font-size="18" text-anchor="middle">With references, candidate MinHash hits inform the feature subset</text>
 <path d="M326 1244.0 L326 1406.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
 <text x="160" y="1420.0" font-size="27" text-anchor="middle">De novo clustering</text>
 <rect x="313" y="1407.0" width="26" height="26" rx="0" fill="#F5F5F5" stroke="#111111" stroke-width="1.5"/>
@@ -175,7 +171,7 @@
 <path d="M997.0 1420.0 L1010.0 1407.0 L1023.0 1420.0 L1010.0 1433.0 Z" fill="#f5f5f5" stroke="#666666" stroke-width="3"/>
 <text x="1010.0" y="1370.0" font-size="22" text-anchor="middle">Resolve window votes</text>
 <text x="1010.0" y="1395.0" font-size="22" text-anchor="middle">to original contigs</text>
-<text x="1010.0" y="1457.0" font-size="18" text-anchor="middle">membership / denoising</text>
+<text x="1010.0" y="1457.0" font-size="18" text-anchor="middle">SCARAB / pandas</text>
 <path d="M1272.0 1420.0 L1285.0 1407.0 L1298.0 1420.0 L1285.0 1433.0 Z" fill="#f5f5f5" stroke="#666666" stroke-width="3"/>
 <text x="1285.0" y="1370.0" font-size="22" text-anchor="middle">Separate noise</text>
 <text x="1285.0" y="1395.0" font-size="22" text-anchor="middle">from assigned contigs</text>
@@ -188,7 +184,8 @@
 <path d="M1023.0 1420.0 L1272.0 1420.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
 <path d="M1298.0 1420.0 L1547.0 1420.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
 <path d="M326 1434.0 L326 1646.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
-<text x="160" y="1660.0" font-size="27" text-anchor="middle">Anchored recruitment</text>
+<text x="160" y="1645.0" font-size="27" text-anchor="middle">Anchored recruitment</text>
+<text x="160" y="1675.0" font-size="27" text-anchor="middle">(optional)</text>
 <rect x="313" y="1647.0" width="26" height="26" rx="0" fill="#F5F5F5" stroke="#111111" stroke-width="1.5"/>
 <text x="326" y="1667.0" font-size="20" text-anchor="middle">7</text>
 <path d="M339 1660.0 L350 1660.0" fill="none" stroke="#111111" stroke-width="1.5"/>
@@ -214,7 +211,7 @@
 <path d="M807 1724.0 L820 1711.0 L833 1724.0 L820 1737.0 Z" fill="#f5f5f5" stroke="#666666" stroke-width="3"/>
 <text x="820" y="1674.0" font-size="22" text-anchor="middle">Train anchor model;</text>
 <text x="820" y="1699.0" font-size="22" text-anchor="middle">predict inliers</text>
-<text x="820" y="1761.0" font-size="18" text-anchor="middle">OneClassSVM</text>
+<text x="820" y="1761.0" font-size="18" text-anchor="middle">scikit-learn</text>
 <path d="M1147 1724.0 L1160 1711.0 L1173 1724.0 L1160 1737.0 Z" fill="#f5f5f5" stroke="#666666" stroke-width="3"/>
 <text x="1160" y="1674.0" font-size="22" text-anchor="middle">Resolve window</text>
 <text x="1160" y="1699.0" font-size="22" text-anchor="middle">support per contig</text>
@@ -226,7 +223,6 @@
 <circle cx="1560" cy="1660.0" r="12" fill="#D5E8D4" stroke="#82B366" stroke-width="3"/>
 <text x="1560" y="1610.0" font-size="22" text-anchor="middle">HDBSCAN + OC-SVM</text>
 <text x="1560" y="1635.0" font-size="22" text-anchor="middle">recruitment tables</text>
-<text x="1010" y="1808" font-size="18" text-anchor="middle">Optional: both branches use qualifying anchors and the shared embedding</text>
 <path d="M326 1674.0 L326 1886.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
 <text x="160" y="1900.0" font-size="27" text-anchor="middle">Evidence combination</text>
 <rect x="313" y="1887.0" width="26" height="26" rx="0" fill="#F5F5F5" stroke="#111111" stroke-width="1.5"/>
@@ -238,7 +234,7 @@
 <path d="M813.6666666666667 1900.0 L826.6666666666667 1887.0 L839.6666666666667 1900.0 L826.6666666666667 1913.0 Z" fill="#f5f5f5" stroke="#666666" stroke-width="3"/>
 <text x="826.6666666666667" y="1850.0" font-size="22" text-anchor="middle">Pairwise set</text>
 <text x="826.6666666666667" y="1875.0" font-size="22" text-anchor="middle">intersections</text>
-<text x="826.6666666666667" y="1937.0" font-size="18" text-anchor="middle">three evidence pairs</text>
+<text x="826.6666666666667" y="1937.0" font-size="18" text-anchor="middle">SCARAB</text>
 <path d="M1180.3333333333335 1900.0 L1193.3333333333335 1887.0 L1206.3333333333335 1900.0 L1193.3333333333335 1913.0 Z" fill="#f5f5f5" stroke="#666666" stroke-width="3"/>
 <text x="1193.3333333333335" y="1850.0" font-size="22" text-anchor="middle">Union supported sets;</text>
 <text x="1193.3333333333335" y="1875.0" font-size="22" text-anchor="middle">retain trusted anchors</text>
@@ -249,7 +245,6 @@
 <path d="M473.0 1900.0 L813.6666666666667 1900.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
 <path d="M839.6666666666667 1900.0 L1180.3333333333335 1900.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
 <path d="M1206.3333333333335 1900.0 L1547.0 1900.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
-<text x="1010" y="1998" font-size="18" text-anchor="middle">The intersect product is not a strict three-way intersection</text>
 <path d="M326 1914.0 L326 2076.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
 <text x="160" y="2090.0" font-size="27" text-anchor="middle">Sequence products</text>
 <rect x="313" y="2077.0" width="26" height="26" rx="0" fill="#F5F5F5" stroke="#111111" stroke-width="1.5"/>
@@ -261,15 +256,15 @@
 <path d="M722.0 2090.0 L735.0 2077.0 L748.0 2090.0 L735.0 2103.0 Z" fill="#f5f5f5" stroke="#666666" stroke-width="3"/>
 <text x="735.0" y="2040.0" font-size="22" text-anchor="middle">Recover original</text>
 <text x="735.0" y="2065.0" font-size="22" text-anchor="middle">metagenomic contigs</text>
-<text x="735.0" y="2127.0" font-size="18" text-anchor="middle">compile_recruits</text>
+<text x="735.0" y="2127.0" font-size="18" text-anchor="middle">SCARAB</text>
 <path d="M997.0 2090.0 L1010.0 2077.0 L1023.0 2090.0 L1010.0 2103.0 Z" fill="#f5f5f5" stroke="#666666" stroke-width="3"/>
 <text x="1010.0" y="2040.0" font-size="22" text-anchor="middle">Combine trusted</text>
 <text x="1010.0" y="2065.0" font-size="22" text-anchor="middle">sequence + recruits</text>
-<text x="1010.0" y="2127.0" font-size="18" text-anchor="middle">anchored outputs only</text>
+<text x="1010.0" y="2127.0" font-size="18" text-anchor="middle">SCARAB</text>
 <path d="M1272.0 2090.0 L1285.0 2077.0 L1298.0 2090.0 L1285.0 2103.0 Z" fill="#f5f5f5" stroke="#666666" stroke-width="3"/>
 <text x="1285.0" y="2040.0" font-size="22" text-anchor="middle">Remove redundant</text>
 <text x="1285.0" y="2065.0" font-size="22" text-anchor="middle">sequence</text>
-<text x="1285.0" y="2127.0" font-size="18" text-anchor="middle">BBTools dedupe</text>
+<text x="1285.0" y="2127.0" font-size="18" text-anchor="middle">BBTools</text>
 <circle cx="1560.0" cy="2090.0" r="12" fill="#D5E8D4" stroke="#82B366" stroke-width="3"/>
 <text x="1560.0" y="2040.0" font-size="22" text-anchor="middle">Bin FASTAs + extended</text>
 <text x="1560.0" y="2065.0" font-size="22" text-anchor="middle">population-genomes (xPGs)</text>
@@ -278,7 +273,8 @@
 <path d="M1023.0 2090.0 L1272.0 2090.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
 <path d="M1298.0 2090.0 L1547.0 2090.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
 <path d="M326 2104.0 L326 2266.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
-<text x="160" y="2280.0" font-size="27" text-anchor="middle">Guided reassembly</text>
+<text x="160" y="2265.0" font-size="27" text-anchor="middle">Guided reassembly</text>
+<text x="160" y="2295.0" font-size="27" text-anchor="middle">(optional)</text>
 <rect x="313" y="2267.0" width="26" height="26" rx="0" fill="#F5F5F5" stroke="#111111" stroke-width="1.5"/>
 <text x="326" y="2287.0" font-size="20" text-anchor="middle">10</text>
 <path d="M339 2280.0 L448 2280.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
@@ -288,7 +284,7 @@
 <path d="M722.0 2280.0 L735.0 2267.0 L748.0 2280.0 L735.0 2293.0 Z" fill="#f5f5f5" stroke="#666666" stroke-width="3"/>
 <text x="735.0" y="2230.0" font-size="22" text-anchor="middle">Map; select pairs;</text>
 <text x="735.0" y="2255.0" font-size="22" text-anchor="middle">recover FASTQs</text>
-<text x="735.0" y="2317.0" font-size="18" text-anchor="middle">minimap2; SAMtools</text>
+<text x="735.0" y="2317.0" font-size="18" text-anchor="middle">minimap2 / SAMtools</text>
 <path d="M997.0 2280.0 L1010.0 2267.0 L1023.0 2280.0 L1010.0 2293.0 Z" fill="#f5f5f5" stroke="#666666" stroke-width="3"/>
 <text x="1010.0" y="2230.0" font-size="22" text-anchor="middle">Repair pairs; trim</text>
 <text x="1010.0" y="2255.0" font-size="22" text-anchor="middle">adapters and quality</text>
@@ -296,7 +292,7 @@
 <path d="M1272.0 2280.0 L1285.0 2267.0 L1298.0 2280.0 L1285.0 2293.0 Z" fill="#f5f5f5" stroke="#666666" stroke-width="3"/>
 <text x="1285.0" y="2230.0" font-size="22" text-anchor="middle">Assemble using</text>
 <text x="1285.0" y="2255.0" font-size="22" text-anchor="middle">trusted contigs</text>
-<text x="1285.0" y="2317.0" font-size="18" text-anchor="middle">SPAdes --isolate</text>
+<text x="1285.0" y="2317.0" font-size="18" text-anchor="middle">SPAdes</text>
 <circle cx="1560.0" cy="2280.0" r="12" fill="#D5E8D4" stroke="#82B366" stroke-width="3"/>
 <text x="1560.0" y="2230.0" font-size="22" text-anchor="middle">Contigs, scaffolds +</text>
 <text x="1560.0" y="2255.0" font-size="22" text-anchor="middle">reassembly summary</text>
@@ -304,7 +300,6 @@
 <path d="M748.0 2280.0 L997.0 2280.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
 <path d="M1023.0 2280.0 L1272.0 2280.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
 <path d="M1298.0 2280.0 L1547.0 2280.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
-<text x="1010" y="2378" font-size="18" text-anchor="middle">Optional: scarab reassemble; paired short reads; same installed environment</text>
 <path d="M326 2294.0 L326 2456.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
 <text x="160" y="2470.0" font-size="27" text-anchor="middle">Review and export</text>
 <rect x="313" y="2457.0" width="26" height="26" rx="0" fill="#F5F5F5" stroke="#111111" stroke-width="1.5"/>
@@ -316,17 +311,16 @@
 <path d="M813.6666666666667 2470.0 L826.6666666666667 2457.0 L839.6666666666667 2470.0 L826.6666666666667 2483.0 Z" fill="#f5f5f5" stroke="#666666" stroke-width="3"/>
 <text x="826.6666666666667" y="2420.0" font-size="22" text-anchor="middle">Inspect recruitment</text>
 <text x="826.6666666666667" y="2445.0" font-size="22" text-anchor="middle">evidence and parameters</text>
-<text x="826.6666666666667" y="2507.0" font-size="18" text-anchor="middle">logs; run manifest</text>
+<text x="826.6666666666667" y="2507.0" font-size="18" text-anchor="middle">SCARAB</text>
 <path d="M1180.3333333333335 2470.0 L1193.3333333333335 2457.0 L1206.3333333333335 2470.0 L1193.3333333333335 2483.0 Z" fill="#f5f5f5" stroke="#666666" stroke-width="3"/>
-<text x="1193.3333333333335" y="2420.0" font-size="22" text-anchor="middle">Validate genome</text>
-<text x="1193.3333333333335" y="2445.0" font-size="22" text-anchor="middle">quality independently</text>
-<text x="1193.3333333333335" y="2507.0" font-size="18" text-anchor="middle">downstream user analysis</text>
+<text x="1193.3333333333335" y="2420.0" font-size="22" text-anchor="middle">Export sequences</text>
+<text x="1193.3333333333335" y="2445.0" font-size="22" text-anchor="middle">and assignment tables</text>
+<text x="1193.3333333333335" y="2507.0" font-size="18" text-anchor="middle">SCARAB / pandas</text>
 <circle cx="1560.0" cy="2470.0" r="12" fill="#D5E8D4" stroke="#82B366" stroke-width="3"/>
 <text x="1560.0" y="2420.0" font-size="22" text-anchor="middle">Sequences and tables</text>
 <text x="1560.0" y="2445.0" font-size="22" text-anchor="middle">for downstream analyses</text>
 <path d="M473.0 2470.0 L813.6666666666667 2470.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
 <path d="M839.6666666666667 2470.0 L1180.3333333333335 2470.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
 <path d="M1206.3333333333335 2470.0 L1547.0 2470.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
-<text x="1010" y="2568" font-size="18" text-anchor="middle">Genome quality control and biological interpretation remain downstream user analyses</text>
 </g>
 </svg>

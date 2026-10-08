@@ -33,11 +33,11 @@
 <path d="M813.6666666666667 370.0 L826.6666666666667 357.0 L839.6666666666667 370.0 L826.6666666666667 383.0 Z" fill="#f5f5f5" stroke="#666666" stroke-width="3"/>
 <text x="826.6666666666667" y="320.0" font-size="22" text-anchor="middle">Filter contigs;</text>
 <text x="826.6666666666667" y="345.0" font-size="22" text-anchor="middle">create sequence windows</text>
-<text x="826.6666666666667" y="407.0" font-size="18" text-anchor="middle">Length / overlap settings</text>
+<text x="826.6666666666667" y="407.0" font-size="18" text-anchor="middle">SCARAB</text>
 <path d="M1180.3333333333335 370.0 L1193.3333333333335 357.0 L1206.3333333333335 370.0 L1193.3333333333335 383.0 Z" fill="#f5f5f5" stroke="#666666" stroke-width="3"/>
 <text x="1193.3333333333335" y="320.0" font-size="22" text-anchor="middle">MinHash search;</text>
 <text x="1193.3333333333335" y="345.0" font-size="22" text-anchor="middle">select trusted anchors</text>
-<text x="1193.3333333333335" y="407.0" font-size="18" text-anchor="middle">sourmash; similarity cutoff</text>
+<text x="1193.3333333333335" y="407.0" font-size="18" text-anchor="middle">sourmash</text>
 <circle cx="1560.0" cy="370.0" r="12" fill="#D5E8D4" stroke="#82B366" stroke-width="3"/>
 <text x="1560.0" y="320.0" font-size="22" text-anchor="middle">Windows, candidate hits</text>
 <text x="1560.0" y="345.0" font-size="22" text-anchor="middle">and reference anchors</text>
@@ -55,11 +55,11 @@
 <path d="M813.6666666666667 560.0 L826.6666666666667 547.0 L839.6666666666667 560.0 L826.6666666666667 573.0 Z" fill="#f5f5f5" stroke="#666666" stroke-width="3"/>
 <text x="826.6666666666667" y="510.0" font-size="22" text-anchor="middle">Map reads; summarize</text>
 <text x="826.6666666666667" y="535.0" font-size="22" text-anchor="middle">and scale coverage</text>
-<text x="826.6666666666667" y="597.0" font-size="18" text-anchor="middle">minimap2; SAMtools; depth</text>
+<text x="826.6666666666667" y="597.0" font-size="18" text-anchor="middle">minimap2 / SAMtools</text>
 <path d="M1180.3333333333335 560.0 L1193.3333333333335 547.0 L1206.3333333333335 560.0 L1193.3333333333335 573.0 Z" fill="#f5f5f5" stroke="#666666" stroke-width="3"/>
 <text x="1193.3333333333335" y="510.0" font-size="22" text-anchor="middle">Count tetranucleotides;</text>
 <text x="1193.3333333333335" y="535.0" font-size="22" text-anchor="middle">transform and scale</text>
-<text x="1193.3333333333335" y="597.0" font-size="18" text-anchor="middle">Canonical counts; CLR</text>
+<text x="1193.3333333333335" y="597.0" font-size="18" text-anchor="middle">scikit-bio / scikit-learn</text>
 <circle cx="1560.0" cy="560.0" r="12" fill="#D5E8D4" stroke="#82B366" stroke-width="3"/>
 <text x="1560.0" y="510.0" font-size="22" text-anchor="middle">Abundance and</text>
 <text x="1560.0" y="535.0" font-size="22" text-anchor="middle">composition matrices</text>
@@ -77,7 +77,7 @@
 <path d="M813.6666666666667 750.0 L826.6666666666667 737.0 L839.6666666666667 750.0 L826.6666666666667 763.0 Z" fill="#f5f5f5" stroke="#666666" stroke-width="3"/>
 <text x="826.6666666666667" y="700.0" font-size="22" text-anchor="middle">Resolve AutoOpt settings</text>
 <text x="826.6666666666667" y="725.0" font-size="22" text-anchor="middle">and explicit overrides</text>
-<text x="826.6666666666667" y="787.0" font-size="18" text-anchor="middle">Rényi profiles / presets</text>
+<text x="826.6666666666667" y="787.0" font-size="18" text-anchor="middle">SCARAB / NumPy</text>
 <path d="M1180.3333333333335 750.0 L1193.3333333333335 737.0 L1206.3333333333335 750.0 L1193.3333333333335 763.0 Z" fill="#f5f5f5" stroke="#666666" stroke-width="3"/>
 <text x="1193.3333333333335" y="700.0" font-size="22" text-anchor="middle">Embed feature views;</text>
 <text x="1193.3333333333335" y="725.0" font-size="22" text-anchor="middle">join by window ID</text>
@@ -103,7 +103,7 @@
 <path d="M1180.3333333333335 940.0 L1193.3333333333335 927.0 L1206.3333333333335 940.0 L1193.3333333333335 953.0 Z" fill="#f5f5f5" stroke="#666666" stroke-width="3"/>
 <text x="1193.3333333333335" y="890.0" font-size="22" text-anchor="middle">Anchor-trained inliers;</text>
 <text x="1193.3333333333335" y="915.0" font-size="22" text-anchor="middle">resolve contig support</text>
-<text x="1193.3333333333335" y="977.0" font-size="18" text-anchor="middle">OC-SVM; window votes</text>
+<text x="1193.3333333333335" y="977.0" font-size="18" text-anchor="middle">scikit-learn</text>
 <circle cx="1560.0" cy="940.0" r="12" fill="#D5E8D4" stroke="#82B366" stroke-width="3"/>
 <text x="1560.0" y="890.0" font-size="22" text-anchor="middle">De novo bins and</text>
 <text x="1560.0" y="915.0" font-size="22" text-anchor="middle">anchored assignments</text>
@@ -121,11 +121,11 @@
 <path d="M813.6666666666667 1130.0 L826.6666666666667 1117.0 L839.6666666666667 1130.0 L826.6666666666667 1143.0 Z" fill="#f5f5f5" stroke="#666666" stroke-width="3"/>
 <text x="826.6666666666667" y="1080.0" font-size="22" text-anchor="middle">Union pairwise agreements;</text>
 <text x="826.6666666666667" y="1105.0" font-size="22" text-anchor="middle">retain trusted anchors</text>
-<text x="826.6666666666667" y="1167.0" font-size="18" text-anchor="middle">(M ∩ H) ∪ (M ∩ S) ∪ (H ∩ S) ∪ A</text>
+<text x="826.6666666666667" y="1167.0" font-size="18" text-anchor="middle">SCARAB</text>
 <path d="M1180.3333333333335 1130.0 L1193.3333333333335 1117.0 L1206.3333333333335 1130.0 L1193.3333333333335 1143.0 Z" fill="#f5f5f5" stroke="#666666" stroke-width="3"/>
 <text x="1193.3333333333335" y="1080.0" font-size="22" text-anchor="middle">Recover contigs; add trusted</text>
 <text x="1193.3333333333335" y="1105.0" font-size="22" text-anchor="middle">sequence and deduplicate</text>
-<text x="1193.3333333333335" y="1167.0" font-size="18" text-anchor="middle">BBTools dedupe</text>
+<text x="1193.3333333333335" y="1167.0" font-size="18" text-anchor="middle">BBTools</text>
 <circle cx="1560.0" cy="1130.0" r="12" fill="#D5E8D4" stroke="#82B366" stroke-width="3"/>
 <text x="1560.0" y="1055.0" font-size="22" text-anchor="middle">Recruitment tables, bins and</text>
 <text x="1560.0" y="1080.0" font-size="22" text-anchor="middle">extended population-genomes</text>
@@ -134,7 +134,8 @@
 <path d="M839.6666666666667 1130.0 L1180.3333333333335 1130.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
 <path d="M1206.3333333333335 1130.0 L1547.0 1130.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
 <path d="M326 1144.0 L326 1306.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
-<text x="160" y="1320.0" font-size="27" text-anchor="middle">Guided reassembly</text>
+<text x="160" y="1305.0" font-size="27" text-anchor="middle">Guided reassembly</text>
+<text x="160" y="1335.0" font-size="27" text-anchor="middle">(optional)</text>
 <rect x="313" y="1307.0" width="26" height="26" rx="0" fill="#F5F5F5" stroke="#111111" stroke-width="1.5"/>
 <text x="326" y="1327.0" font-size="20" text-anchor="middle">6</text>
 <path d="M339 1320.0 L448 1320.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
@@ -144,17 +145,16 @@
 <path d="M813.6666666666667 1320.0 L826.6666666666667 1307.0 L839.6666666666667 1320.0 L826.6666666666667 1333.0 Z" fill="#f5f5f5" stroke="#666666" stroke-width="3"/>
 <text x="826.6666666666667" y="1270.0" font-size="22" text-anchor="middle">Map and select pairs;</text>
 <text x="826.6666666666667" y="1295.0" font-size="22" text-anchor="middle">repair and trim</text>
-<text x="826.6666666666667" y="1357.0" font-size="18" text-anchor="middle">minimap2; SAMtools; BBTools</text>
+<text x="826.6666666666667" y="1357.0" font-size="18" text-anchor="middle">minimap2 / BBTools</text>
 <path d="M1180.3333333333335 1320.0 L1193.3333333333335 1307.0 L1206.3333333333335 1320.0 L1193.3333333333335 1333.0 Z" fill="#f5f5f5" stroke="#666666" stroke-width="3"/>
 <text x="1193.3333333333335" y="1270.0" font-size="22" text-anchor="middle">Assemble using</text>
 <text x="1193.3333333333335" y="1295.0" font-size="22" text-anchor="middle">trusted contigs</text>
-<text x="1193.3333333333335" y="1357.0" font-size="18" text-anchor="middle">SPAdes --isolate</text>
+<text x="1193.3333333333335" y="1357.0" font-size="18" text-anchor="middle">SPAdes</text>
 <circle cx="1560.0" cy="1320.0" r="12" fill="#D5E8D4" stroke="#82B366" stroke-width="3"/>
 <text x="1560.0" y="1270.0" font-size="22" text-anchor="middle">Contigs, scaffolds,</text>
 <text x="1560.0" y="1295.0" font-size="22" text-anchor="middle">summary and logs</text>
 <path d="M473.0 1320.0 L813.6666666666667 1320.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
 <path d="M839.6666666666667 1320.0 L1180.3333333333335 1320.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
 <path d="M1206.3333333333335 1320.0 L1547.0 1320.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
-<text x="1010" y="1418" font-size="18" text-anchor="middle">Optional: scarab reassemble; uses the same installed environment</text>
 </g>
 </svg>

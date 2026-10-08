@@ -17,12 +17,12 @@
         },
         {
           "label": "Filter contigs;\ncreate sequence windows",
-          "tool": "Length / overlap settings",
+          "tool": "SCARAB",
           "kind": "compute"
         },
         {
           "label": "MinHash search;\nselect trusted anchors",
-          "tool": "sourmash; similarity cutoff",
+          "tool": "sourmash",
           "kind": "compute"
         },
         {
@@ -30,8 +30,7 @@
           "tool": "",
           "kind": "output"
         }
-      ],
-      "note": ""
+      ]
     },
     {
       "title": "Build feature views",
@@ -43,12 +42,12 @@
         },
         {
           "label": "Map reads; summarize\nand scale coverage",
-          "tool": "minimap2; SAMtools; depth",
+          "tool": "minimap2 / SAMtools",
           "kind": "compute"
         },
         {
           "label": "Count tetranucleotides;\ntransform and scale",
-          "tool": "Canonical counts; CLR",
+          "tool": "scikit-bio / scikit-learn",
           "kind": "compute"
         },
         {
@@ -56,8 +55,7 @@
           "tool": "",
           "kind": "output"
         }
-      ],
-      "note": ""
+      ]
     },
     {
       "title": "Select and embed",
@@ -69,7 +67,7 @@
         },
         {
           "label": "Resolve AutoOpt settings\nand explicit overrides",
-          "tool": "Rényi profiles / presets",
+          "tool": "SCARAB / NumPy",
           "kind": "compute"
         },
         {
@@ -82,8 +80,7 @@
           "tool": "",
           "kind": "output"
         }
-      ],
-      "note": ""
+      ]
     },
     {
       "title": "Cluster and recruit",
@@ -100,7 +97,7 @@
         },
         {
           "label": "Anchor-trained inliers;\nresolve contig support",
-          "tool": "OC-SVM; window votes",
+          "tool": "scikit-learn",
           "kind": "compute"
         },
         {
@@ -108,8 +105,7 @@
           "tool": "",
           "kind": "output"
         }
-      ],
-      "note": ""
+      ]
     },
     {
       "title": "Combine and extend",
@@ -121,12 +117,12 @@
         },
         {
           "label": "Union pairwise agreements;\nretain trusted anchors",
-          "tool": "(M ∩ H) ∪ (M ∩ S) ∪ (H ∩ S) ∪ A",
+          "tool": "SCARAB",
           "kind": "compute"
         },
         {
           "label": "Recover contigs; add trusted\nsequence and deduplicate",
-          "tool": "BBTools dedupe",
+          "tool": "BBTools",
           "kind": "compute"
         },
         {
@@ -134,11 +130,10 @@
           "tool": "",
           "kind": "output"
         }
-      ],
-      "note": ""
+      ]
     },
     {
-      "title": "Guided reassembly",
+      "title": "Guided reassembly (optional)",
       "nodes": [
         {
           "label": "xPGs +\npaired short reads",
@@ -147,12 +142,12 @@
         },
         {
           "label": "Map and select pairs;\nrepair and trim",
-          "tool": "minimap2; SAMtools; BBTools",
+          "tool": "minimap2 / BBTools",
           "kind": "compute"
         },
         {
           "label": "Assemble using\ntrusted contigs",
-          "tool": "SPAdes --isolate",
+          "tool": "SPAdes",
           "kind": "compute"
         },
         {
@@ -160,8 +155,7 @@
           "tool": "",
           "kind": "output"
         }
-      ],
-      "note": "Optional: scarab reassemble; uses the same installed environment"
+      ]
     }
   ]
 }

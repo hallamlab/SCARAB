@@ -30,7 +30,7 @@ python ../../../scripts/validate_test.py --dataset . --output SCARAB_out --reass
 
 ## Workflow
 
-[![SCARAB workflow](docs/assets/workflow-brief.svg?v=1a5a049061b1)](https://hallamlab-scarab.readthedocs.io/)
+[![SCARAB workflow](docs/assets/workflow-brief.svg?v=mp-tools-20261008)](https://hallamlab-scarab.readthedocs.io/)
 
 For input preparation, parameters, outputs, guided reassembly, and HPC execution, see the **[user guide](https://hallamlab-scarab.readthedocs.io/)**.
 
