@@ -2,7 +2,7 @@
 
 SCARAB recruits and bins metagenomic contigs using sequence composition, read abundance, and optional trusted genomes such as SAGs. It produces extended population-genomes (xPGs) and supports optional guided reassembly in the same environment.
 
-**[Full user guide](https://hallamlab-scarab.readthedocs.io/en/latest/index.html)** · [Test test](https://hallamlab-scarab.readthedocs.io/en/latest/test.html) · [Issues and feature requests](https://github.com/hallamlab/SCARAB/issues)
+**[Full user guide](https://hallamlab-scarab.readthedocs.io/en/latest/index.html)** · [Test](https://hallamlab-scarab.readthedocs.io/en/latest/test.html) · [Issues and feature requests](https://github.com/hallamlab/SCARAB/issues)
 
 ## Quick start
 
@@ -19,7 +19,7 @@ SCARAB 1.0.0 is available from [Anaconda](https://anaconda.org/hallamlab/scarab)
 The tiny recruitment-and-reassembly demo is bundled in `examples/test/demo/` (about 1.7 MiB). No separate data download is needed. To obtain the example matching the release:
 
 ```bash
-git clone --branch v1.0.0 https://github.com/hallamlab/SCARAB.git
+git clone https://github.com/hallamlab/SCARAB.git
 cd SCARAB/examples/test/demo
 scarab recruit -m k12.gold_assembly.fasta -l read_list.txt -s SAG -o SCARAB_out -t 4
 scarab reassemble \
@@ -30,8 +30,8 @@ python ../../../scripts/validate_test.py --dataset . --output SCARAB_out --reass
 
 ## Workflow
 
-[![SCARAB workflow](docs/assets/workflow-brief.svg?v=mp-tools-20261008)](https://hallamlab-scarab.readthedocs.io/)
+[![SCARAB workflow](docs/assets/workflow-brief.svg?v=local-tiling-20261010)](https://hallamlab-scarab.readthedocs.io/)
 
-For input preparation, parameters, outputs, guided reassembly, and HPC execution, see the **[user guide](https://hallamlab-scarab.readthedocs.io/)**.
+For input preparation, parameters, outputs, guided reassembly, and resource settings, see the **[user guide](https://hallamlab-scarab.readthedocs.io/)**.
 
 [Report issues or request features](https://github.com/hallamlab/SCARAB/issues). Documentation source is maintained in `docs/`.

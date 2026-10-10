@@ -4,8 +4,8 @@
     "Assembly FASTA + read-library list (paired FASTQs or supported single-file reads)",
     "Optional: trusted genome/scaffold FASTAs for anchored recruitment"
   ],
-  "controller": "SCARAB Python controller • Local command or one Slurm job",
-  "execution": "Input validation • Output lock and provenance • Tool threads and worker pools • Reuse of matching completed runs",
+  "controller": "SCARAB Python controller \u2022 Local execution",
+  "execution": "Input validation \u2022 Output lock and provenance \u2022 Tool threads and worker pools \u2022 Reuse of matching completed runs",
   "rows": [
     {
       "title": "Contig tiling",
@@ -21,12 +21,12 @@
           "kind": "compute"
         },
         {
-          "label": "Create overlapping\nsequence windows",
+          "label": "Create overlapping\ncontig tiles",
           "tool": "SCARAB",
           "kind": "compute"
         },
         {
-          "label": "Assembly windows +\ntrusted windows",
+          "label": "Assembly tiles +\ntrusted tiles",
           "tool": "",
           "kind": "output"
         }
@@ -36,7 +36,7 @@
       "title": "Sequence anchors (optional)",
       "nodes": [
         {
-          "label": "Trusted windows +\nassembly contigs",
+          "label": "Trusted tiles +\nassembly contigs",
           "tool": "",
           "kind": "input"
         },
@@ -67,7 +67,7 @@
       "lanes": [
         [
           {
-            "label": "FASTQs +\nassembly windows",
+            "label": "FASTQs +\nassembly tiles",
             "tool": "",
             "kind": "input"
           },
@@ -84,7 +84,7 @@
         ],
         [
           {
-            "label": "Assembly\nwindows",
+            "label": "Assembly\ntiles",
             "tool": "",
             "kind": "input"
           },
@@ -146,12 +146,12 @@
           "kind": "compute"
         },
         {
-          "label": "Join embeddings\nby window ID",
+          "label": "Join embeddings\nby tile ID",
           "tool": "pandas",
           "kind": "compute"
         },
         {
-          "label": "Combined window\nembedding",
+          "label": "Combined tile\nembedding",
           "tool": "",
           "kind": "output"
         }
@@ -171,7 +171,7 @@
           "kind": "compute"
         },
         {
-          "label": "Resolve window votes\nto original contigs",
+          "label": "Resolve tile votes\nto original contigs",
           "tool": "SCARAB / pandas",
           "kind": "compute"
         },
@@ -192,7 +192,7 @@
       "lanes": [
         [
           {
-            "label": "Anchors +\nembedded windows",
+            "label": "Anchors +\nembedded tiles",
             "tool": "",
             "kind": "input"
           },
@@ -209,7 +209,7 @@
         ],
         [
           {
-            "label": "Anchors +\nembedded windows",
+            "label": "Anchors +\nembedded tiles",
             "tool": "",
             "kind": "input"
           },
@@ -219,7 +219,7 @@
             "kind": "compute"
           },
           {
-            "label": "Resolve window\nsupport per contig",
+            "label": "Resolve tile\nsupport per contig",
             "tool": "SCARAB",
             "kind": "compute"
           }

@@ -2,7 +2,7 @@ name: Package and workflow tests
 on:
   pull_request:
   push:
-    branches: [refactor, main, 'docs/user-guide']
+    branches: [dev, main]
   workflow_dispatch:
 permissions:
   contents: read

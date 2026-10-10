@@ -17,8 +17,8 @@ PacBio HiFi input uses `--pacbio` with a single FASTQ path per row. The implemen
 
 For directory input the current discovery code accepts lowercase `.fasta`, `.fna`, and `.fa`. Use plain FASTA files with distinct basenames. Directory discovery does not include `.fasta.gz`. Reference quality affects anchor quality; remove contamination and record the origin of each reference.
 
-## Sequence windows
+## Contig tiling
 
-By default, contigs shorter than 2,000 bp are excluded from recruitment windows. Longer sequences are divided into windows up to 10,000 bp with 2,000 bp overlap. Clustering uses windows/subcontigs and final sequence products return to original contig identifiers. Keep identifiers unique and stable across your analysis.
+By default, contigs shorter than 2,000 bp are excluded before contig tiling. Longer sequences are divided into contig tiles up to 10,000 bp with 2,000 bp overlap. Clustering uses contig tiles and final sequence products return to original contig identifiers. Keep identifiers unique and stable across your analysis.
 
 For containers, every manifest path must exist **inside the container**. Bind the data directory at the same absolute path when using absolute read lists, or launch from a mounted working directory when using relative lists.

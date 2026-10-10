@@ -1,33 +1,12 @@
-# Resources, HPC execution, and reruns
+# Resources and reruns
 
 ## Local execution
 
-`scarab recruit` is a Python controller executing recruitment stages in sequence. `--num_threads` is passed to supported tools and parallel operations. It is not a total-memory limit, and some numerical libraries may use their own thread pools. Memory use grows with the number of sequence windows, abundance samples, and embedding/clustering matrices. Measure a representative assembly before sizing a large run.
+`scarab recruit` is a Python controller executing recruitment stages in sequence. `--num_threads` is passed to supported tools and parallel operations. It is not a total-memory limit, and some numerical libraries may use their own thread pools. Memory use grows with the number of contig tiles, abundance samples, and embedding/clustering matrices. Measure a representative assembly before sizing a large run.
 
 BBTools deduplication uses a 4 GB Java heap by default. Set `--dedupe_memory 8g` (or a value in `m`) for larger xPGs. This bounds that subprocess heap only; Python matrices, other tools, and Java overhead need additional memory.
 
 SCARAB gives Numba a temporary cache inside the output directory and removes it after the run. This supports read-only installations and containers running as your user. An explicitly configured `NUMBA_CACHE_DIR` is respected.
-
-## Slurm
-
-SCARAB has no native Nextflow/Slurm submission interface. Submit the whole command as one cluster job and request resources for that command. For example, adapt this submission script to your cluster:
-
-```bash
-#!/usr/bin/env bash
-#SBATCH --job-name=scarab
-#SBATCH --account=YOUR_ACCOUNT
-#SBATCH --nodes=1
-#SBATCH --ntasks=1
-#SBATCH --cpus-per-task=8
-#SBATCH --mem=32G
-#SBATCH --time=12:00:00
-#SBATCH --output=scarab-%j.log
-set -euo pipefail
-
-mamba run -n scarab scarab recruit   -m /shared/assembly.fasta -l /shared/read_list.txt   -s /shared/trusted_genomes -o /shared/scarab_results   -t "$SLURM_CPUS_PER_TASK"
-```
-
-Submit with `sbatch scarab-job.sh`. Memory and time are illustrative requests, not measured guarantees. Ensure Mamba is available in the batch shell (load your site's module if required), and that reads, references, outputs and the environment are accessible to the compute node. Containers offer an alternative execution environment; they do not add a scheduler to SCARAB.
 
 ## Reusing outputs and forcing a fresh run
 

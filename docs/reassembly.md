@@ -69,7 +69,6 @@ nonzero. A matching completed run can be invoked again to reuse its results.
 An interrupted or changed run requires a fresh output or `--force`; this first
 implementation does not resume individual failed SPAdes stages.
 
-Under Slurm, request resources for one whole command and use the same
-`--threads` and `--memory` values. Container users must bind all input paths
+Container users must bind all input paths
 and a writable output directory. See [installation](installation.md) and
 [resources](resources.md).

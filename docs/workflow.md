@@ -28,7 +28,7 @@ The arrows connecting numbered modules show conceptual progression; they do not 
 
 [Zoom diagram](assets/diagrams/data-flow.svg) · [Mermaid source](diagrams/data-flow.mmd)
 
-The Python controller executes these stages in sequence; the parallel branches in the data-flow diagram describe contributing evidence, not independent Nextflow jobs. With trusted references, MinHash candidates inform the feature subset and high-similarity hits provide anchors. Without usable anchors, de novo processing can continue without anchored products. See [parameters](parameters.md), [outputs](outputs.md), and [citations](citations.md).
+The Python controller executes these stages in sequence; the parallel branches in the data-flow diagram describe contributing evidence, not independently scheduled jobs. With trusted references, MinHash candidates inform the feature subset and high-similarity hits provide anchors. Without usable anchors, de novo processing can continue without anchored products. See [parameters](parameters.md), [outputs](outputs.md), and [citations](citations.md).
 ## What the workflow reconstructs
 
 SCARAB combines an assembled metagenome, read-derived abundance, sequence
@@ -45,7 +45,7 @@ chimerism, strain variation and sequence support downstream.
 
 ## Follow the evidence through recruitment
 
-### 1. Sequence windows and identifiers
+### 1. Contig tiling and identifiers
 
 The controller validates the assembly, read manifest and optional trusted
 FASTA inputs before starting work. It records input paths, sizes, modification
@@ -53,14 +53,14 @@ times, settings and software version. One output directory belongs to one
 configuration; an output lock prevents overlapping runs from writing into it.
 
 Assembly and trusted sequences are length-filtered and tiled. Defaults are
-10,000-bp windows, 2,000-bp overlap and a 2,000-bp minimum. The overlap option is
-not a 2,000-bp step size. End windows can overlap more than the nominal amount
-because the implementation retains a terminal window. Window identifiers map
+10,000-bp tiles, 2,000-bp overlap and a 2,000-bp minimum. The overlap option is
+not a 2,000-bp step size. End tiles can overlap more than the nominal amount
+because the implementation retains a terminal tile. Tile identifiers map
 back to original contigs for final FASTA extraction.
 
 ### 2. MinHash candidates and trusted anchors
 
-With references, sourmash builds signatures for trusted windows and indexes
+With references, sourmash builds signatures for trusted tiles and indexes
 qualifying original metagenome contigs in a sequence Bloom tree. The default
 k-mer size is 201. The search collects Jaccard and containment results in the
 legacy `jacc_sim` field. Consequently, a value of one can mean complete
@@ -70,12 +70,12 @@ SCARAB distinguishes the broader set of candidate MinHash matches from hits
 meeting the configured minimum similarity. Candidate contigs inform the
 feature subset; qualifying hits establish anchors for trusted recruitment.
 If there are no candidate matches, feature embedding uses the available
-assembly windows. Without qualifying anchors, anchored products are absent
+assembly tiles. Without qualifying anchors, anchored products are absent
 and de novo processing can continue.
 
 ### 3. Coverage and composition features
 
-minimap2 maps every supplied read library to the assembly windows. SAMtools
+minimap2 maps every supplied read library to the assembly tiles. SAMtools
 processes alignments and MetaBAT's depth summarizer creates coverage features;
 SCARAB does not run MetaBAT's binning algorithm. Multiple libraries provide
 multiple coverage measurements for the same assembly, rather than separate
@@ -84,7 +84,7 @@ assemblies or separate SCARAB runs. Coverage features are standardized.
 Sequence composition uses 136 canonical tetranucleotide features, including
 pseudocount handling, normalization, centered log-ratio transformation and
 standardization. UMAP embeds coverage and composition separately, then the
-controller joins those embeddings by window identifier. Preserve the feature
+controller joins those embeddings by tile identifier. Preserve the feature
 and assignment tables when tracing an unexpected recruitment decision.
 
 ### 4. Parameter selection
@@ -104,13 +104,13 @@ flags interact, including the effective defaults recorded in the log.
 
 ### 5. Density clustering and anchored recruitment
 
-HDBSCAN produces de novo window assignments, membership information and noise
-labels. The denoising logic resolves window-level evidence to original contigs;
+HDBSCAN produces de novo tile assignments, membership information and noise
+labels. The denoising logic resolves tile-level evidence to original contigs;
 noise is retained in diagnostic tables and is not exported as a genome bin.
 
 When anchors are available, a separate anchored HDBSCAN fit and anchor-to-cluster
-resolution produce density-based recruits. OC-SVM trains on embedded windows
-from anchor-associated metagenomic contigs, predicts inlier windows, and
+resolution produce density-based recruits. OC-SVM trains on embedded tiles
+from anchor-associated metagenomic contigs, predicts inlier tiles, and
 summarizes support per original contig. These are complementary evidence
 sources, not independent demonstrations of taxonomic identity.
 
@@ -149,8 +149,8 @@ functional annotation and comparative analyses remain separate user analyses.
 ## Controller and source map
 
 The Python controller calls stages in order. The diagram's evidence branches
-do not represent a Nextflow scheduler. Native-tool threads and selected worker
-pools use the requested resources; a Slurm submission wraps the whole command.
+describe contributing evidence. Native-tool threads and selected worker
+pools use the requested resources.
 Reassembly processes targets one at a time, assigning the requested threads
 to the active target. See [resources and reruns](resources.md).
 

@@ -1,6 +1,6 @@
 # Installation
 
-SCARAB 1.0.0 is available from the [Hallam Lab Anaconda channel](https://anaconda.org/hallamlab/scarab) and [Quay repository](https://quay.io/repository/hallamlab/scarab?tab=tags). Use Mamba for a native installation, Docker for a container, or Apptainer for HPC.
+SCARAB 1.0.0 is available from the [Hallam Lab Anaconda channel](https://anaconda.org/hallamlab/scarab) and [Quay repository](https://quay.io/repository/hallamlab/scarab?tab=tags). Use Mamba for a native installation, Docker for a container, or Apptainer for a portable SIF image.
 
 SCARAB supports Linux. All installation routes provide the same `scarab` CLI and use the dependency versions recorded in this repository. The supported runtime is Python 3.10; the scientific dependency versions are kept consistent across Python, Mamba, Conda recipes, and the container.
 
@@ -49,7 +49,7 @@ apptainer pull scarab.sif docker://quay.io/hallamlab/scarab:1.0.0
 apptainer exec scarab.sif scarab info
 ```
 
-Run the [Apptainer demo command](test.md#apptainer). The SIF already contains SCARAB and its dependencies; an additional runtime Mamba environment is unnecessary. Build/pull on a machine with internet, then copy the SIF to an offline HPC filesystem.
+Run the [Apptainer demo command](test.md#apptainer). The SIF already contains SCARAB and its dependencies; an additional runtime Mamba environment is unnecessary. Build/pull on a machine with internet, then copy the SIF to a machine without internet access.
 
 For an unpublished locally built image:
 
@@ -63,7 +63,7 @@ This uses the local image archive and does not require uploading it to Quay.
 ## 4. GitHub source installation
 
 ```bash
-git clone --branch v1.0.0 https://github.com/hallamlab/SCARAB.git
+git clone https://github.com/hallamlab/SCARAB.git
 cd SCARAB
 mamba env create -f environment.yml
 mamba activate scarab_cenv

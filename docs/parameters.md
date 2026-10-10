@@ -6,8 +6,8 @@ Use `scarab recruit --help` for the complete [CLI reference](cli-reference.md). 
 
 | Option | Default | Meaning |
 |---|---:|---|
-| `--max_contig_len` | 10000 | Maximum window length. |
-| `--overlap_len` | 2000 | Overlap between adjacent windows. |
+| `--max_contig_len` | 10000 | Maximum tile length. |
+| `--overlap_len` | 2000 | Overlap between adjacent tiles. |
 | `--min_len` | 2000 | Minimum included sequence length. |
 | `--kmer_size` | 201 | k-mer size used in MinHash recruitment. |
 | `--jaccard` | 1.0 | Similarity threshold supplied to the recruitment/clustering logic. |

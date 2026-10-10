@@ -9,7 +9,7 @@ SCARAB includes **one bundled demo** that exercises recruitment through guided r
 Use your SCARAB checkout. If you installed only the Mamba package or container, obtain the example from GitHub:
 
 ```bash
-git clone --branch v1.0.0 https://github.com/hallamlab/SCARAB.git
+git clone https://github.com/hallamlab/SCARAB.git
 cd SCARAB
 ```
 
@@ -94,4 +94,4 @@ The fixture checks technical execution and data consistency. Its selected reads 
 
 ## Provenance
 
-The fixture derives from the [original public E. coli K12 SCARAB demo](https://drive.google.com/file/d/1yUoPpoNRl6-CZHkRoUYDbikBJk4yC-3V/view). `tests/test/demo.json` preserves the original archive provenance; `tests/test/bundled.json` records the selection procedure, tool version, retained read counts and input hashes. `examples/test/README.md` and `scripts/build_test_subset.py` document reproduction. The original 55.7 MiB archive is a source artifact, not a second test test.
+The fixture derives from the [original public E. coli K12 SCARAB demo](https://drive.google.com/file/d/1yUoPpoNRl6-CZHkRoUYDbikBJk4yC-3V/view). `tests/test/demo.json` preserves the original archive provenance; `tests/test/bundled.json` records the selection procedure, tool version, retained read counts and input hashes. `examples/test/README.md` and `scripts/build_test_subset.py` document reproduction. The original 55.7 MiB archive is a source artifact, not a second test.

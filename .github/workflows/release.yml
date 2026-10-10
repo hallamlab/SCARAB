@@ -11,7 +11,7 @@ on:
         type: boolean
         default: false
   push:
-    branches: ['docs/user-guide']
+    branches: [dev, main]
     paths:
       - '.github/workflows/release.yml'
       - 'src/scarab/**'

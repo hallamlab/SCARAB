@@ -5,7 +5,7 @@
 <defs><marker id="arrow" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#111111"/></marker></defs>
 <g font-family="Times New Roman, Times, serif" fill="#111111">
 <rect x="20" y="20" width="1680" height="78" rx="16" fill="#CCCCCC" stroke="#666666" stroke-width="1.5"/>
-<text x="860" y="53" font-size="28" text-anchor="middle">SCARAB Python controller • Local command or one Slurm job</text>
+<text x="860" y="53" font-size="28" text-anchor="middle">SCARAB Python controller • Local execution</text>
 <text x="860" y="82" font-size="20" text-anchor="middle">Input validation • Output lock and provenance • Tool threads and worker pools • Reuse of matching completed runs</text>
 <rect x="20" y="120" width="975" height="130" rx="16" fill="#DAE8FC" stroke="#6C8EBF" stroke-width="1.5"/>
 <text x="45" y="151" font-size="28" text-anchor="start">Inputs</text>
@@ -34,11 +34,11 @@
 <text x="826.6666666666667" y="407.0" font-size="18" text-anchor="middle">SCARAB</text>
 <path d="M1180.3333333333335 370.0 L1193.3333333333335 357.0 L1206.3333333333335 370.0 L1193.3333333333335 383.0 Z" fill="#f5f5f5" stroke="#666666" stroke-width="3"/>
 <text x="1193.3333333333335" y="320.0" font-size="22" text-anchor="middle">Create overlapping</text>
-<text x="1193.3333333333335" y="345.0" font-size="22" text-anchor="middle">sequence windows</text>
+<text x="1193.3333333333335" y="345.0" font-size="22" text-anchor="middle">contig tiles</text>
 <text x="1193.3333333333335" y="407.0" font-size="18" text-anchor="middle">SCARAB</text>
 <circle cx="1560.0" cy="370.0" r="12" fill="#D5E8D4" stroke="#82B366" stroke-width="3"/>
-<text x="1560.0" y="320.0" font-size="22" text-anchor="middle">Assembly windows +</text>
-<text x="1560.0" y="345.0" font-size="22" text-anchor="middle">trusted windows</text>
+<text x="1560.0" y="320.0" font-size="22" text-anchor="middle">Assembly tiles +</text>
+<text x="1560.0" y="345.0" font-size="22" text-anchor="middle">trusted tiles</text>
 <path d="M473.0 370.0 L813.6666666666667 370.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
 <path d="M839.6666666666667 370.0 L1180.3333333333335 370.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
 <path d="M1206.3333333333335 370.0 L1547.0 370.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
@@ -49,7 +49,7 @@
 <text x="326" y="567.0" font-size="20" text-anchor="middle">2</text>
 <path d="M339 560.0 L448 560.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
 <circle cx="460.0" cy="560.0" r="12" fill="#DAE8FC" stroke="#6C8EBF" stroke-width="3"/>
-<text x="460.0" y="510.0" font-size="22" text-anchor="middle">Trusted windows +</text>
+<text x="460.0" y="510.0" font-size="22" text-anchor="middle">Trusted tiles +</text>
 <text x="460.0" y="535.0" font-size="22" text-anchor="middle">assembly contigs</text>
 <path d="M722.0 560.0 L735.0 547.0 L748.0 560.0 L735.0 573.0 Z" fill="#f5f5f5" stroke="#666666" stroke-width="3"/>
 <text x="735.0" y="510.0" font-size="22" text-anchor="middle">Create MinHash</text>
@@ -78,7 +78,7 @@
 <path d="M350 800.0 L350 736.0 L448 736.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
 <circle cx="460" cy="736.0" r="12" fill="#DAE8FC" stroke="#6C8EBF" stroke-width="3"/>
 <text x="460" y="686.0" font-size="22" text-anchor="middle">FASTQs +</text>
-<text x="460" y="711.0" font-size="22" text-anchor="middle">assembly windows</text>
+<text x="460" y="711.0" font-size="22" text-anchor="middle">assembly tiles</text>
 <path d="M807 736.0 L820 723.0 L833 736.0 L820 749.0 Z" fill="#f5f5f5" stroke="#666666" stroke-width="3"/>
 <text x="820" y="711.0" font-size="22" text-anchor="middle">Map reads; sort BAM</text>
 <text x="820" y="773.0" font-size="18" text-anchor="middle">minimap2 / SAMtools</text>
@@ -92,7 +92,7 @@
 <path d="M350 800.0 L350 864.0 L448 864.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
 <circle cx="460" cy="864.0" r="12" fill="#DAE8FC" stroke="#6C8EBF" stroke-width="3"/>
 <text x="460" y="814.0" font-size="22" text-anchor="middle">Assembly</text>
-<text x="460" y="839.0" font-size="22" text-anchor="middle">windows</text>
+<text x="460" y="839.0" font-size="22" text-anchor="middle">tiles</text>
 <path d="M807 864.0 L820 851.0 L833 864.0 L820 877.0 Z" fill="#f5f5f5" stroke="#666666" stroke-width="3"/>
 <text x="820" y="814.0" font-size="22" text-anchor="middle">Count canonical</text>
 <text x="820" y="839.0" font-size="22" text-anchor="middle">tetranucleotides</text>
@@ -149,10 +149,10 @@
 <text x="826.6666666666667" y="1267.0" font-size="18" text-anchor="middle">UMAP</text>
 <path d="M1180.3333333333335 1230.0 L1193.3333333333335 1217.0 L1206.3333333333335 1230.0 L1193.3333333333335 1243.0 Z" fill="#f5f5f5" stroke="#666666" stroke-width="3"/>
 <text x="1193.3333333333335" y="1180.0" font-size="22" text-anchor="middle">Join embeddings</text>
-<text x="1193.3333333333335" y="1205.0" font-size="22" text-anchor="middle">by window ID</text>
+<text x="1193.3333333333335" y="1205.0" font-size="22" text-anchor="middle">by tile ID</text>
 <text x="1193.3333333333335" y="1267.0" font-size="18" text-anchor="middle">pandas</text>
 <circle cx="1560.0" cy="1230.0" r="12" fill="#D5E8D4" stroke="#82B366" stroke-width="3"/>
-<text x="1560.0" y="1180.0" font-size="22" text-anchor="middle">Combined window</text>
+<text x="1560.0" y="1180.0" font-size="22" text-anchor="middle">Combined tile</text>
 <text x="1560.0" y="1205.0" font-size="22" text-anchor="middle">embedding</text>
 <path d="M473.0 1230.0 L813.6666666666667 1230.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
 <path d="M839.6666666666667 1230.0 L1180.3333333333335 1230.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
@@ -169,7 +169,7 @@
 <text x="735.0" y="1395.0" font-size="22" text-anchor="middle">Density clustering</text>
 <text x="735.0" y="1457.0" font-size="18" text-anchor="middle">HDBSCAN</text>
 <path d="M997.0 1420.0 L1010.0 1407.0 L1023.0 1420.0 L1010.0 1433.0 Z" fill="#f5f5f5" stroke="#666666" stroke-width="3"/>
-<text x="1010.0" y="1370.0" font-size="22" text-anchor="middle">Resolve window votes</text>
+<text x="1010.0" y="1370.0" font-size="22" text-anchor="middle">Resolve tile votes</text>
 <text x="1010.0" y="1395.0" font-size="22" text-anchor="middle">to original contigs</text>
 <text x="1010.0" y="1457.0" font-size="18" text-anchor="middle">SCARAB / pandas</text>
 <path d="M1272.0 1420.0 L1285.0 1407.0 L1298.0 1420.0 L1285.0 1433.0 Z" fill="#f5f5f5" stroke="#666666" stroke-width="3"/>
@@ -192,7 +192,7 @@
 <path d="M350 1660.0 L350 1596.0 L448 1596.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
 <circle cx="460" cy="1596.0" r="12" fill="#DAE8FC" stroke="#6C8EBF" stroke-width="3"/>
 <text x="460" y="1546.0" font-size="22" text-anchor="middle">Anchors +</text>
-<text x="460" y="1571.0" font-size="22" text-anchor="middle">embedded windows</text>
+<text x="460" y="1571.0" font-size="22" text-anchor="middle">embedded tiles</text>
 <path d="M807 1596.0 L820 1583.0 L833 1596.0 L820 1609.0 Z" fill="#f5f5f5" stroke="#666666" stroke-width="3"/>
 <text x="820" y="1546.0" font-size="22" text-anchor="middle">Fit anchored</text>
 <text x="820" y="1571.0" font-size="22" text-anchor="middle">density clusters</text>
@@ -207,13 +207,13 @@
 <path d="M350 1660.0 L350 1724.0 L448 1724.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
 <circle cx="460" cy="1724.0" r="12" fill="#DAE8FC" stroke="#6C8EBF" stroke-width="3"/>
 <text x="460" y="1674.0" font-size="22" text-anchor="middle">Anchors +</text>
-<text x="460" y="1699.0" font-size="22" text-anchor="middle">embedded windows</text>
+<text x="460" y="1699.0" font-size="22" text-anchor="middle">embedded tiles</text>
 <path d="M807 1724.0 L820 1711.0 L833 1724.0 L820 1737.0 Z" fill="#f5f5f5" stroke="#666666" stroke-width="3"/>
 <text x="820" y="1674.0" font-size="22" text-anchor="middle">Train anchor model;</text>
 <text x="820" y="1699.0" font-size="22" text-anchor="middle">predict inliers</text>
 <text x="820" y="1761.0" font-size="18" text-anchor="middle">scikit-learn</text>
 <path d="M1147 1724.0 L1160 1711.0 L1173 1724.0 L1160 1737.0 Z" fill="#f5f5f5" stroke="#666666" stroke-width="3"/>
-<text x="1160" y="1674.0" font-size="22" text-anchor="middle">Resolve window</text>
+<text x="1160" y="1674.0" font-size="22" text-anchor="middle">Resolve tile</text>
 <text x="1160" y="1699.0" font-size="22" text-anchor="middle">support per contig</text>
 <text x="1160" y="1761.0" font-size="18" text-anchor="middle">SCARAB</text>
 <path d="M473 1724.0 L807 1724.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>

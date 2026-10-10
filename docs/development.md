@@ -67,7 +67,7 @@ The workflow defaults to Anaconda owner `hallamlab` and image repository `quay.i
 
 ## Build candidates without publishing
 
-The **Build and validate release candidates** workflow runs automatically for container/build-configuration changes on `docs/user-guide`. It can also be run manually after its workflow file is present on the repository's default branch. Leave **publish_anaconda** and **publish_quay** unchecked.
+The **Build and validate release candidates** workflow runs automatically for container/build-configuration changes on `dev` and `main`. It can also be run manually after its workflow file is present on the repository's default branch. Leave **publish_anaconda** and **publish_quay** unchecked.
 
 It builds/tests the Conda package, installs that package into a fresh Mamba environment and runs the complete recruitment-and-reassembly demo. It also runs regression tests and the same demo in Docker, converts that image to an Apptainer SIF, and runs the demo again in Apptainer. Both container runs use the same result validator as the source route. Packages, the Docker archive, the SIF, checksums, and test logs are retained as workflow artifacts for seven days. Build-only runs need no registry credentials.
 

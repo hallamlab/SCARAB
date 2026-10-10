@@ -2,7 +2,7 @@ name: Check registry credentials (no upload)
 on:
   workflow_dispatch:
   push:
-    branches: ['docs/user-guide']
+    branches: [dev, main]
     paths:
       - '.github/workflows/check-anaconda.yml'
       - 'scripts/check_anaconda.py'

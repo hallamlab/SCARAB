@@ -4,8 +4,8 @@
     "Assembly FASTA + read-library list (paired FASTQs or supported single-file reads)",
     "Optional: trusted genome/scaffold FASTAs for anchored recruitment"
   ],
-  "controller": "SCARAB Python controller • Local command or one Slurm job",
-  "execution": "Input validation • Output lock and provenance • Tool threads and worker pools • Reuse of matching completed runs",
+  "controller": "SCARAB Python controller \u2022 Local execution",
+  "execution": "Input validation \u2022 Output lock and provenance \u2022 Tool threads and worker pools \u2022 Reuse of matching completed runs",
   "rows": [
     {
       "title": "Prepare sequence anchors",
@@ -16,7 +16,7 @@
           "kind": "input"
         },
         {
-          "label": "Filter contigs;\ncreate sequence windows",
+          "label": "Filter contigs;\ncreate contig tiles",
           "tool": "SCARAB",
           "kind": "compute"
         },
@@ -26,7 +26,7 @@
           "kind": "compute"
         },
         {
-          "label": "Windows, candidate hits\nand reference anchors",
+          "label": "Tiles, candidate hits\nand reference anchors",
           "tool": "",
           "kind": "output"
         }
@@ -36,7 +36,7 @@
       "title": "Build feature views",
       "nodes": [
         {
-          "label": "Assembly windows +\nread libraries",
+          "label": "Assembly tiles +\nread libraries",
           "tool": "",
           "kind": "input"
         },
@@ -71,7 +71,7 @@
           "kind": "compute"
         },
         {
-          "label": "Embed feature views;\njoin by window ID",
+          "label": "Embed feature views;\njoin by tile ID",
           "tool": "UMAP",
           "kind": "compute"
         },

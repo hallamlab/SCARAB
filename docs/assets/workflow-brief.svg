@@ -5,7 +5,7 @@
 <defs><marker id="arrow" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#111111"/></marker></defs>
 <g font-family="Times New Roman, Times, serif" fill="#111111">
 <rect x="20" y="20" width="1680" height="78" rx="16" fill="#CCCCCC" stroke="#666666" stroke-width="1.5"/>
-<text x="860" y="53" font-size="28" text-anchor="middle">SCARAB Python controller • Local command or one Slurm job</text>
+<text x="860" y="53" font-size="28" text-anchor="middle">SCARAB Python controller • Local execution</text>
 <text x="860" y="82" font-size="20" text-anchor="middle">Input validation • Output lock and provenance • Tool threads and worker pools • Reuse of matching completed runs</text>
 <rect x="20" y="120" width="975" height="130" rx="16" fill="#DAE8FC" stroke="#6C8EBF" stroke-width="1.5"/>
 <text x="45" y="151" font-size="28" text-anchor="start">Inputs</text>
@@ -32,14 +32,14 @@
 <text x="460.0" y="345.0" font-size="22" text-anchor="middle">trusted genomes</text>
 <path d="M813.6666666666667 370.0 L826.6666666666667 357.0 L839.6666666666667 370.0 L826.6666666666667 383.0 Z" fill="#f5f5f5" stroke="#666666" stroke-width="3"/>
 <text x="826.6666666666667" y="320.0" font-size="22" text-anchor="middle">Filter contigs;</text>
-<text x="826.6666666666667" y="345.0" font-size="22" text-anchor="middle">create sequence windows</text>
+<text x="826.6666666666667" y="345.0" font-size="22" text-anchor="middle">create contig tiles</text>
 <text x="826.6666666666667" y="407.0" font-size="18" text-anchor="middle">SCARAB</text>
 <path d="M1180.3333333333335 370.0 L1193.3333333333335 357.0 L1206.3333333333335 370.0 L1193.3333333333335 383.0 Z" fill="#f5f5f5" stroke="#666666" stroke-width="3"/>
 <text x="1193.3333333333335" y="320.0" font-size="22" text-anchor="middle">MinHash search;</text>
 <text x="1193.3333333333335" y="345.0" font-size="22" text-anchor="middle">select trusted anchors</text>
 <text x="1193.3333333333335" y="407.0" font-size="18" text-anchor="middle">sourmash</text>
 <circle cx="1560.0" cy="370.0" r="12" fill="#D5E8D4" stroke="#82B366" stroke-width="3"/>
-<text x="1560.0" y="320.0" font-size="22" text-anchor="middle">Windows, candidate hits</text>
+<text x="1560.0" y="320.0" font-size="22" text-anchor="middle">Tiles, candidate hits</text>
 <text x="1560.0" y="345.0" font-size="22" text-anchor="middle">and reference anchors</text>
 <path d="M473.0 370.0 L813.6666666666667 370.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
 <path d="M839.6666666666667 370.0 L1180.3333333333335 370.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
@@ -50,7 +50,7 @@
 <text x="326" y="567.0" font-size="20" text-anchor="middle">2</text>
 <path d="M339 560.0 L448 560.0" fill="none" stroke="#111111" stroke-width="1.5" marker-end="url(#arrow)"/>
 <circle cx="460.0" cy="560.0" r="12" fill="#DAE8FC" stroke="#6C8EBF" stroke-width="3"/>
-<text x="460.0" y="510.0" font-size="22" text-anchor="middle">Assembly windows +</text>
+<text x="460.0" y="510.0" font-size="22" text-anchor="middle">Assembly tiles +</text>
 <text x="460.0" y="535.0" font-size="22" text-anchor="middle">read libraries</text>
 <path d="M813.6666666666667 560.0 L826.6666666666667 547.0 L839.6666666666667 560.0 L826.6666666666667 573.0 Z" fill="#f5f5f5" stroke="#666666" stroke-width="3"/>
 <text x="826.6666666666667" y="510.0" font-size="22" text-anchor="middle">Map reads; summarize</text>
@@ -80,7 +80,7 @@
 <text x="826.6666666666667" y="787.0" font-size="18" text-anchor="middle">SCARAB / NumPy</text>
 <path d="M1180.3333333333335 750.0 L1193.3333333333335 737.0 L1206.3333333333335 750.0 L1193.3333333333335 763.0 Z" fill="#f5f5f5" stroke="#666666" stroke-width="3"/>
 <text x="1193.3333333333335" y="700.0" font-size="22" text-anchor="middle">Embed feature views;</text>
-<text x="1193.3333333333335" y="725.0" font-size="22" text-anchor="middle">join by window ID</text>
+<text x="1193.3333333333335" y="725.0" font-size="22" text-anchor="middle">join by tile ID</text>
 <text x="1193.3333333333335" y="787.0" font-size="18" text-anchor="middle">UMAP</text>
 <circle cx="1560.0" cy="750.0" r="12" fill="#D5E8D4" stroke="#82B366" stroke-width="3"/>
 <text x="1560.0" y="700.0" font-size="22" text-anchor="middle">Shared embedding</text>
